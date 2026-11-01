@@ -1,0 +1,1421 @@
+<!doctype html>
+<html lang="bn">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>A3 বুকলেট ডিজাইনার</title>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+Da+2:wght@400;600;800&family=Hind+Siliguri:wght@400;500;600;700&family=Lato:wght@400;700;900&family=Merriweather:wght@400;700&family=Montserrat:wght@400;600;800&family=Noto+Sans+Bengali:wght@400;600;800&family=Noto+Serif+Bengali:wght@400;600;800&family=Playfair+Display:wght@500;700;800&family=Poppins:wght@400;600;800&family=Tiro+Bangla&display=swap" rel="stylesheet">
+<style id="ps">@page{size:A3 landscape;margin:0}</style>
+<style>
+:root{--pat:radial-gradient(color-mix(in srgb,var(--c1) 8%,transparent) 1.5px,transparent 2px);--ps:20px 20px;--clip:ellipse(78% 100% at 50% 0);--clipf:ellipse(78% 100% at 50% 100%);--c1:#0f5c4a;--c2:#c9a227;--bg:#e6e9e7;--tl:#fff;--tx:#1d2321;--ln:#cfd6d2;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1a1f1d;--tl:#262d2a;--tx:#eef2f0;--ln:#3b4440}}
+:root[data-theme="dark"]{--bg:#1a1f1d;--tl:#262d2a;--tx:#eef2f0;--ln:#3b4440}
+html{scroll-padding-top:env(safe-area-inset-top,0px)}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--tx);font-family:'Poppins','Hind Siliguri',sans-serif}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);background:var(--tl);z-index:30}
+.tool{position:sticky;top:env(safe-area-inset-top,0px);z-index:20;background:var(--tl);border-bottom:1px solid var(--ln);padding:8px 10px;display:flex;flex-wrap:wrap;gap:6px 8px;align-items:center;font-size:13px}
+.tool button,.tool select,.tool input[type=number]{font:inherit;padding:5px 8px;border:1px solid var(--ln);border-radius:7px;background:transparent;color:inherit;cursor:pointer}
+.tool input[type=color]{width:30px;height:28px;padding:0;border:1px solid var(--ln);border-radius:6px;background:none}
+.tool input[type=number]{width:58px}
+.tool .sep{width:1px;height:24px;background:var(--ln)}
+.tool .pri{background:var(--c1);color:#fff;border-color:var(--c1)}
+.sw{width:22px;height:22px;border-radius:50%;padding:0!important;border:2px solid #fff!important;box-shadow:0 0 0 1px var(--ln)}
+.note{font-size:12px;opacity:.7;padding:8px 12px}
+#book{display:flex;flex-wrap:wrap;gap:26px;justify-content:center;padding:18px 10px 60px;zoom:.7}
+.page{position:relative;width:210mm;height:296.6mm;flex:none;overflow:hidden;isolation:isolate;background-color:#fbf8f1;background-image:var(--pat);background-size:var(--ps);box-shadow:0 8px 30px rgba(0,0,0,.28);-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.tb{position:absolute;z-index:1;padding:6px 10px;resize:both;overflow:hidden;min-width:40px;min-height:24px;line-height:1.4;font-size:18px}
+.tb:hover{outline:1px dashed var(--c2)}
+.tx{outline:none;min-height:1em}
+.h,.g,.x{display:none;position:absolute;z-index:3;font:11px/18px sans-serif;text-align:center;color:#fff;background:var(--c1);width:18px;height:18px;border-radius:5px;cursor:pointer;padding:0;border:0}
+.h{left:0;top:0;cursor:move;border-radius:0 0 6px 0}
+.g{left:3px;top:3px;cursor:grab}.x{right:3px;top:3px;background:#b3261e}
+.tb:hover>.h,.tb.sel>.h,.card:hover>.g,.card:hover>.x,.card.sel>.g,.card.sel>.x{display:block}
+.sel{outline:2px solid #1976d2!important;outline-offset:1px}
+.imb{width:100%;height:100%;display:flex;align-items:center;justify-content:center;border-radius:50%;background:#fff;border:3px solid var(--c2);color:var(--c1);font-weight:800;font-size:15px}
+.imb img{width:100%;height:100%;object-fit:contain}
+.im{padding:0}
+/* cover */
+.p1::before{content:"";position:absolute;inset:0 0 auto;height:340px;background:radial-gradient(rgba(255,255,255,.09) 2px,transparent 2.5px) 0 0/22px 22px,linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 70%,#000));clip-path:var(--clip)}
+.p1::after{content:"";position:absolute;inset:auto 0 0;height:150px;background:linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 70%,#000));clip-path:var(--clipf)}
+.fr{position:absolute;inset:var(--fi,16px);border:var(--fb,2px solid var(--c2));border-radius:var(--fr,8px);pointer-events:none;z-index:2}
+/* list pages */
+.p2,.p3{display:flex;flex-direction:column}
+.pt{position:relative;height:108px;flex:none;background:linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 70%,#000));border-bottom:4px solid var(--c2);color:#fff;text-align:center;padding-top:12px}
+.ptt{font-size:27px;font-weight:700;outline:none}
+.bar{position:absolute;left:12px;right:12px;top:58px;background:rgba(255,255,255,.92);color:#222;border-radius:9px;padding:5px 9px;display:flex;gap:9px;align-items:center;font-size:12px;flex-wrap:wrap;text-align:left}
+.bar button,.bar select{font:inherit;padding:2px 7px;border:1px solid #bbb;border-radius:6px;background:#fff;cursor:pointer}
+.bar input[type=color]{width:24px;height:22px;padding:0;border:1px solid #bbb;background:none}
+.bar input[type=range]{width:70px}
+.grid{flex:1;padding:24px 28px;display:grid;grid-template-columns:repeat(var(--cols,3),1fr);gap:16px;align-content:start;overflow:hidden}
+.card{position:relative;background:var(--cbg,#fff);border:2px solid var(--cbd,var(--c2));border-radius:14px;padding:10px;text-align:center;font-size:15px;box-shadow:0 3px 10px rgba(0,0,0,.08)}
+.ph{height:var(--ph,250px);border-radius:10px;background:#eef1ef;border:2px dashed #b9c4be;display:flex;align-items:center;justify-content:center;color:#7d8a84;cursor:pointer;overflow:hidden;font-size:13px}
+.ph img{width:100%;height:100%;object-fit:cover}
+.nm{font-weight:700;font-size:1.1em;margin-top:8px;color:var(--c1);outline:none}
+.sc{font-size:.9em;color:#555;outline:none}
+.warn{display:none;position:absolute;left:0;right:0;bottom:0;background:#b3261e;color:#fff;text-align:center;font-size:12px;padding:3px;z-index:5}
+.over .warn{display:block}
+.wm{position:absolute;inset:0;z-index:-1;pointer-events:none;background-position:center;background-repeat:no-repeat}
+.p3>.B{flex:none;margin:0 28px 26px}
+.sec{flex:1;min-height:0;display:flex;flex-direction:column;border:2px solid var(--c1);border-radius:14px;overflow:hidden;background:rgba(255,255,255,.72)}
+.sec .pt{height:76px;padding-top:6px}.sec .ptt{font-size:19px}.sec .bar{top:36px}
+.sec .grid{padding:12px 14px;gap:10px}.sec .card{font-size:12px;padding:6px}
+#book{counter-reset:n}.sec .grid{counter-reset:n}.card{counter-increment:n}
+.card::before{content:counter(n);position:absolute;left:50%;top:-1px;transform:translateX(-50%);background:var(--c1);color:#fff;font:600 10px/14px sans-serif;padding:0 7px;border-radius:0 0 7px 7px;z-index:3}
+.ph img{cursor:grab;touch-action:none;user-select:none}
+.tx svg{display:block}
+.cnt{font-size:11px;opacity:.75;margin-left:auto}
+.p4 .C{padding:8px 16px;gap:6px;font-size:13px}.p4 .C h3{font-size:1.15em;padding-bottom:3px}.p4 .C .ct .ph{width:80px;height:96px}.p4 .C .cg{gap:7px 18px}.p4 .sig{padding-top:10px}
+#ic,#ds{display:none}
+#sb{position:fixed;left:0;top:var(--th,60px);bottom:0;width:236px;background:var(--tl);border-right:1px solid var(--ln);overflow-y:auto;padding:4px 10px 30px;z-index:15;display:none;font-size:13px}
+body.sbo #sb{display:block}body.sbo #book,body.sbo .note{margin-left:236px}
+#sb h4{margin:14px 0 6px;font-size:13px;color:var(--c1)}
+.dg{display:grid;grid-template-columns:1fr 1fr;gap:8px}
+.dt{background:none;border:2px solid transparent;border-radius:8px;padding:3px;cursor:pointer;color:inherit;font:inherit;font-size:11px;text-align:center}
+.dt.on{border-color:var(--c1)}
+.dt i{display:block;aspect-ratio:210/297;position:relative;overflow:hidden;background-color:#fbf8f1;border:1px solid var(--ln);margin-bottom:3px}
+.dt b,.dt s{position:absolute;left:0;right:0;background:var(--c1)}.dt b{top:0;height:34%}.dt s{bottom:0;height:16%}
+.ig{display:grid;grid-template-columns:repeat(4,1fr);gap:6px}
+.ig button{aspect-ratio:1;border:1px solid var(--ln);border-radius:8px;background:transparent;cursor:pointer;font-size:20px;padding:5px;color:var(--c1);display:flex;align-items:center;justify-content:center}
+.ig button svg{width:100%;height:100%}.ig .tf{font-size:11px;font-weight:700;padding:0}
+.ig .sw{width:100%;height:auto;aspect-ratio:1}
+@media (max-width:760px){body.sbo #book,body.sbo .note{margin-left:0}#sb{box-shadow:0 0 30px rgba(0,0,0,.4)}}
+.R{flex:none;height:165px;border:3px solid var(--c1);border-radius:16px;background:#fff;overflow:hidden;display:flex;flex-direction:column}
+.rh{background:linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 70%,#000));color:#fff;padding:5px 18px;font-weight:700;border-bottom:3px solid var(--c2);outline:none}
+.rb{flex:1;padding:8px 18px;display:grid;grid-template-columns:1fr 1fr;gap:10px 24px;align-content:center}
+.grid{align-items:start}
+.p2 .grid,.p3 .grid{padding:20px 24px;gap:12px}
+.card{padding:5px;box-shadow:var(--csh,0 3px 10px rgba(0,0,0,.1))}
+.card .ph{border-width:1px;border-radius:9px}
+.nm{margin-top:5px;line-height:1.3;font-size:1.05em}
+.nm>div{font-weight:400;font-size:.82em;color:#555}
+/* page 4 */
+.p4{padding:26px 30px 14px;display:flex;flex-direction:column;gap:10px}
+.sp{position:relative;font-size:15px;outline-offset:2px}
+.sp [contenteditable]{outline:none}
+.A{height:300px;border:3px solid var(--c1);border-radius:16px;overflow:hidden;background:#fff;display:flex;flex-direction:column}
+.ah{background:linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 70%,#000));color:#fff;padding:12px 18px;display:flex;justify-content:space-between;align-items:center;border-bottom:4px solid var(--c2);font-weight:700}
+.ab{flex:1;display:flex;gap:18px;padding:16px 18px;align-items:center}
+.ab .ph{width:150px;height:190px;flex:none}
+.af{flex:1;display:flex;flex-direction:column;gap:11px}
+.f{display:flex;gap:8px;align-items:flex-end}
+.f span{white-space:nowrap;font-weight:600;color:var(--c1)}
+.f .v{flex:1;border-bottom:1.5px dotted #888;min-height:1.4em}
+.B{height:165px;border-radius:16px;background:linear-gradient(120deg,var(--c1),color-mix(in srgb,var(--c1) 65%,#000));color:#fff;display:flex;align-items:center;gap:20px;padding:12px 22px;border:3px dashed var(--c2);outline-offset:-10px}
+.bl{text-align:center;color:var(--c2);min-width:130px}.big{font-size:56px;font-weight:800;line-height:1}.sm{font-size:20px;font-weight:700}
+.br{flex:1;line-height:1.6}
+.cut{text-align:center;color:#777;font-size:13px;border-top:2px dashed #777;padding-top:3px;margin-top:2px}
+.C{flex:none;border:2px solid var(--c1);border-radius:12px;background:#fff;padding:14px 20px;display:flex;flex-direction:column;gap:10px}
+.C h3{margin:0;text-align:center;color:var(--c1);font-size:1.4em;border-bottom:2px solid var(--c2);padding-bottom:6px}
+.cg{display:grid;grid-template-columns:1fr 1fr;gap:12px 22px}.cg .w{grid-column:1/3}
+.ct{display:flex;gap:16px;align-items:flex-start}.ct .ph{width:105px;height:130px;flex:none}.ct .cg{flex:1}
+.sig{display:flex;justify-content:space-between;margin-top:auto;padding-top:22px}.sig div{border-top:1.5px solid #555;padding-top:3px;min-width:170px;text-align:center;font-size:13px}
+@media print{
+html,body{background:#fff!important;padding:0!important}
+.tool,.bar,.h,.g,.x,.warn,.note,body::before,.card::before,#sb{display:none!important}
+body.sbo #book{margin-left:0!important}
+#book{zoom:1!important;gap:0;padding:0;display:flex;flex-wrap:wrap;justify-content:flex-start}
+.page{box-shadow:none}.tb,.sel{outline:none!important}.tb:hover{outline:none}
+body.b #book{width:420mm}
+body.b #p4{order:1}body.b #p1{order:2;break-after:page}body.b #p2{order:3}body.b #p3{order:4;break-after:page}
+body.a #book{display:block;width:210mm}body.a .page{break-after:page}
+}
+</style>
+<style>
+/* ===== Studio shell (Canva-style) ===== */
+:root{--ui:#7c3aed;--cv:#eceff4}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--cv:#14181a}}
+:root[data-theme="dark"]{--cv:#14181a}
+body{background:var(--cv);font-family:'Poppins','Hind Siliguri',system-ui,sans-serif;padding-bottom:70px}
+body::before{background:#6d28d9}
+.note,.tool .sw,#sv,#rs,#sbt,#pb,#pa{display:none!important}
+#top{position:sticky;top:env(safe-area-inset-top,0px);z-index:22;height:52px;display:flex;align-items:center;gap:10px;padding:0 12px;background:linear-gradient(90deg,#6d28d9,#7c3aed 45%,#0891b2);color:#fff}
+#top button,#top summary{font:inherit;font-size:13px;border:0;border-radius:8px;padding:7px 12px;background:rgba(255,255,255,.16);color:#fff;cursor:pointer;list-style:none;white-space:nowrap}
+#top summary::-webkit-details-marker{display:none}
+#top button:hover,#top summary:hover{background:rgba(255,255,255,.28)}
+#top .pri{background:#fff;color:#6d28d9;font-weight:600}
+#top .logo{font-size:15px;white-space:nowrap}
+#dname{background:rgba(255,255,255,.14);border:0;border-radius:8px;color:#fff;padding:7px 10px;font:inherit;font-size:14px;width:200px;min-width:90px}
+#stat{font-size:12px;opacity:.92;white-space:nowrap}
+.fl{flex:1}
+.dd{position:relative}
+.ddm{position:absolute;right:0;top:115%;background:var(--tl);color:var(--tx);border-radius:12px;box-shadow:0 12px 34px rgba(0,0,0,.28);padding:6px;display:grid;min-width:230px;z-index:40}
+#top .ddm button{background:none;color:var(--tx);text-align:left;padding:9px 12px}
+#top .ddm button:hover{background:rgba(124,58,237,.14)}
+.tool{top:calc(env(safe-area-inset-top,0px) + 52px);margin:10px 14px 0;border:1px solid var(--ln);border-radius:14px;box-shadow:0 4px 16px rgba(0,0,0,.08)}
+#toast{position:fixed;left:50%;bottom:78px;transform:translateX(-50%);background:#111;color:#fff!important;padding:9px 18px;border-radius:22px;z-index:60;font-size:13px;max-width:90vw}
+#toast:empty{display:none}
+#sb{top:calc(env(safe-area-inset-top,0px) + 52px);width:316px;padding:0;flex-direction:row;overflow:hidden;box-shadow:2px 0 16px rgba(0,0,0,.08)}
+body.sbo #sb{display:flex}
+body.sbo #book{margin-left:316px}
+body.sbo .tool{margin-left:330px}
+#rail{width:68px;flex:none;border-right:1px solid var(--ln);display:flex;flex-direction:column;gap:4px;padding:8px 4px;overflow-y:auto}
+#rail button{display:flex;flex-direction:column;align-items:center;gap:2px;background:none;border:0;border-radius:10px;padding:8px 2px;cursor:pointer;color:inherit;font:inherit;font-size:10.5px}
+#rail button i{font-style:normal;font-size:20px}
+#rail button.on{background:rgba(124,58,237,.15);color:var(--ui);font-weight:600}
+#pn{flex:1;overflow-y:auto;padding:2px 12px 40px;min-width:0}
+.tp{display:none}.tp.on{display:block}
+.pv{display:block;width:100%;text-align:left;padding:10px 12px;margin:7px 0;border:1px solid var(--ln);border-radius:10px;background:transparent;color:inherit;cursor:pointer;font:inherit;font-size:13px}
+.pv:hover{border-color:var(--ui)}
+#tp_bg button,#tp_bg select{margin:5px 5px 0 0;font:inherit;font-size:12px;padding:5px 8px;border:1px solid var(--ln);border-radius:8px;background:transparent;color:inherit;cursor:pointer}
+.pj{display:flex;gap:5px;align-items:center;border:1px solid var(--ln);border-radius:10px;padding:8px;margin:7px 0}
+.pj div{flex:1;min-width:0;word-break:break-word}.pj small{display:block;opacity:.6;font-size:11px}
+.pj button{border:1px solid var(--ln);background:transparent;color:inherit;border-radius:7px;padding:3px 7px;cursor:pointer;font-size:12px}
+#book{padding:26px 16px 96px;gap:34px}
+.page{box-shadow:0 12px 40px rgba(20,24,40,.24)}
+#bb{position:fixed;left:50%;transform:translateX(-50%);bottom:calc(12px + env(safe-area-inset-bottom,0px));z-index:25;display:flex;gap:4px;align-items:center;background:var(--tl);border:1px solid var(--ln);border-radius:30px;padding:5px 8px;box-shadow:0 8px 26px rgba(0,0,0,.2);max-width:96vw;overflow-x:auto}
+#bb button{border:0;background:none;color:inherit;font:inherit;font-size:12px;padding:6px 11px;border-radius:20px;cursor:pointer;white-space:nowrap}
+#bb button.on{background:var(--ui);color:#fff}
+#bb input{width:100px}
+@media (max-width:760px){
+body.sbo #book{margin-left:0}body.sbo .tool{margin-left:14px}
+#sb{width:300px;box-shadow:0 0 30px rgba(0,0,0,.4)}
+#top .logo b,#stat{display:none}#dname{width:120px}
+}
+@media print{
+#top,#bb,#toast{display:none!important}
+body{padding-bottom:0!important}
+#book{padding:0!important;margin:0!important;gap:0!important}
+.page{box-shadow:none!important}
+}
+</style>
+<style>
+/* ===== Contextual floating toolbar ===== */
+.tool{display:none;position:fixed;left:0;right:0;top:calc(env(safe-area-inset-top,0px) + 62px);margin:0 auto;width:fit-content;max-width:calc(100vw - 24px);z-index:20;padding:6px 8px;gap:4px;align-items:center;flex-wrap:wrap;justify-content:center;background:var(--tl);border:1px solid var(--ln);border-radius:16px;box-shadow:0 10px 30px rgba(0,0,0,.18);font-size:13px}
+.tool.on{display:flex;animation:pop .16s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(-8px)}to{opacity:1;transform:none}}
+body.sbo .tool{left:316px;margin:0 auto;max-width:calc(100vw - 340px)}
+.tg{display:flex;align-items:center;gap:6px;padding:2px 10px;border-right:1px solid var(--ln)}
+.tg:last-child{border-right:0}
+.tg.hid{display:none}
+.cap{font-size:10px;opacity:.55;white-space:nowrap}
+.chip{font-size:11px;font-weight:600;color:var(--ui);background:rgba(124,58,237,.13);border-radius:20px;padding:4px 11px;white-space:nowrap}
+.tool button,.tool select,.tool input[type=number]{border:1px solid transparent;background:rgba(124,58,237,.07);border-radius:9px;padding:6px 9px;min-height:30px}
+.tool button:hover{background:rgba(124,58,237,.2)}
+.tool input[type=color]{width:28px;height:28px;border-radius:50%;padding:0;border:2px solid var(--ln);overflow:hidden;background:none}
+.tool input[type=color]::-webkit-color-swatch-wrapper{padding:0}
+.tool input[type=color]::-webkit-color-swatch{border:0;border-radius:50%}
+.tool label{display:flex;align-items:center;gap:4px;white-space:nowrap}
+#tp_up label{display:block;margin:8px 0;font-size:13px}
+#book{padding-top:72px}
+@media (max-width:760px){body.sbo .tool{left:0;max-width:calc(100vw - 24px)}}
+</style>
+<link href="https://fonts.googleapis.com/css2?family=Anek+Bangla:wght@400;700&family=Atma:wght@400;700&family=Mina:wght@400;700&family=Galada&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Abril+Fatface&family=Alfa+Slab+One&family=Archivo+Black&family=Bebas+Neue&family=Caveat:wght@400;700&family=Cinzel:wght@400;700&family=Comfortaa:wght@400;700&family=Cormorant+Garamond:wght@500;700&family=DM+Serif+Display&family=Dancing+Script:wght@400;700&family=Great+Vibes&family=Josefin+Sans:wght@400;700&family=Libre+Baskerville:wght@400;700&family=Lobster&family=Marcellus&family=Nunito:wght@400;700&family=Oswald:wght@400;700&family=Pacifico&family=Quicksand:wght@400;700&family=Raleway:wght@400;700&family=Righteous&family=Satisfy&display=swap" rel="stylesheet">
+<style>
+.bgr{display:flex;flex-direction:column;gap:3px;font-size:12px;margin:9px 0}
+.bgr.ck{flex-direction:row;align-items:center;gap:7px}
+#tp_bg select,#tp_bg input[type=range]{width:100%}
+#tp_bg input[type=color]{width:100%;height:30px;padding:0;border:1px solid var(--ln);border-radius:8px;background:none}
+.nob::before,.nob::after,.nob .fr{display:none}
+</style>
+<style>
+/* ===== 30 স্টাইল সিস্টেম: সাধারণ হুক (স্টাইল প্রয়োগ হলে পেজে .sx ক্লাস বসে) ===== */
+.sx{background-color:var(--pbg)}
+.sx.p1::before{background:var(--band);backdrop-filter:var(--bbf,none)}
+.sx.p1::after{background:var(--band)}
+.sx .pt,.sx .rh{background:var(--band);color:var(--bt)}
+.sx .nm{color:var(--nmc)}
+.sx .nm>div{color:inherit;opacity:.75}
+.sx .grid .card{color:var(--cx)}
+.sx .sec,.sx .R{background:var(--secbg);color:var(--cx)}
+.sx .B{background:var(--bb2,var(--band));color:var(--bt)}
+.card{border-width:var(--cbw,2px);border-style:var(--cbs,solid);backdrop-filter:var(--cbf,none)}
+body.cap .h,body.cap .g,body.cap .x,body.cap .warn,body.cap .bar,body.cap .card::before{display:none!important}
+/* প্রতিটি স্টাইলের নিজস্ব ভিজ্যুয়াল নিয়ম */
+.st-3d [data-h]{text-shadow:1px 1px 0 #4c1d95,2px 2px 0 #4c1d95,3px 3px 0 #4c1d95,4px 5px 10px rgba(0,0,0,.35)}
+.st-futuristic [data-h]{text-shadow:0 0 10px rgba(34,211,238,.7)}
+.st-futuristic .fr{box-shadow:0 0 12px rgba(34,211,238,.5)}
+.st-neon [data-h]{text-shadow:0 0 6px currentColor,0 0 18px currentColor}
+.st-neon .fr{box-shadow:0 0 14px #ff2e97,inset 0 0 14px #ff2e97}
+.st-brutalist.p1::before{border-bottom:8px solid #000}
+.st-neumorphism.p1::before{clip-path:none;inset:18px 18px auto 18px;height:300px;border-radius:34px;box-shadow:9px 9px 16px #a3b1c6,-9px -9px 16px #fff}
+.st-neumorphism.p1::after{clip-path:none;inset:auto 18px 18px 18px;height:110px;border-radius:34px;box-shadow:9px 9px 16px #a3b1c6,-9px -9px 16px #fff}
+.st-papercut.p1::before{border-radius:0 0 60% 40%/0 0 90px 70px;box-shadow:0 10px 0 #e9c46a,0 20px 0 #e76f51}
+.st-papercut.p1::after{border-radius:50% 50% 0 0/60px 60px 0 0;box-shadow:0 -10px 0 #e9c46a,0 -20px 0 #e76f51}
+.st-watercolor.p1::before{border-radius:0 0 50% 50%/0 0 90px 90px;filter:blur(1.2px)}
+.st-watercolor.p1::after{border-radius:50% 50% 0 0/90px 90px 0 0;filter:blur(1.2px)}
+.st-collage .card:nth-child(3n+1){transform:rotate(-1.8deg)}
+.st-collage .card:nth-child(3n+2){transform:rotate(1.2deg)}
+.st-collage .card:nth-child(3n){transform:rotate(-.6deg)}
+.st-duotone .ph{position:relative;background:#ff3d81}
+.st-duotone .ph img{filter:grayscale(1) contrast(1.15);mix-blend-mode:multiply}
+.st-duotone .ph::after{content:'';position:absolute;inset:0;background:#3b0a8a;mix-blend-mode:lighten;pointer-events:none}
+.st-monochrome img,.st-monochrome .tx img{filter:grayscale(1)}
+.st-cinematic .ph img{filter:contrast(1.1) saturate(.85) sepia(.15)}
+.st-vintage .ph img{filter:sepia(.45) contrast(.95)}
+.st-typography.p1::after{clip-path:none;background:none;content:'Aa আ';inset:auto auto 30px 16px;height:auto;font:900 520px/.8 'Bebas Neue','Anek Bangla';color:rgba(244,63,94,.1);z-index:0}
+/* স্টাইল প্যানেল */
+.sfl{display:flex;flex-wrap:wrap;gap:5px;margin:6px 0}
+.sfl button{border:1px solid var(--ln);background:transparent;color:inherit;border-radius:16px;padding:4px 10px;font:inherit;font-size:11px;cursor:pointer}
+.sfl button.on{background:var(--ui);color:#fff;border-color:var(--ui)}
+.scur{font-size:12px;padding:8px 10px;border-radius:10px;background:rgba(124,58,237,.1);margin:6px 0}
+.stp{display:none;margin:6px 0}.stp.on{display:block}
+.stp .tbs{display:flex;gap:5px;flex-wrap:wrap;margin:5px 0}
+.stp .tbs button{flex:1;border:1px solid var(--ui);background:transparent;color:var(--ui);border-radius:8px;padding:6px 4px;font:inherit;font-size:11px;cursor:pointer;min-width:60px}
+.stp .tbs button:hover{background:var(--ui);color:#fff}
+.stp label{display:block;font-size:12px;margin:6px 0}
+.sg{display:grid;grid-template-columns:1fr 1fr;gap:9px;margin-top:8px}
+.scard{border:2px solid transparent;border-radius:12px;padding:5px;background:rgba(124,58,237,.05);display:flex;flex-direction:column;gap:3px;font-size:11px}
+.scard.on{border-color:var(--ui)}
+.scard .sn{display:flex;flex-direction:column}.scard .sn b{font-size:12px}.scard .sn span{opacity:.75}
+.scard p{margin:0;opacity:.7;font-size:10.5px;line-height:1.35}
+.scard button{border:0;background:var(--ui);color:#fff;border-radius:8px;padding:6px;font:inherit;font-size:11px;cursor:pointer;margin-top:2px}
+.sth{position:relative;aspect-ratio:210/297;overflow:hidden;border-radius:6px;border:1px solid var(--ln)}
+.sth i{position:absolute;left:0;right:0;font-style:normal}
+.sth .tb1{top:0;height:34%}.sth .tb2{bottom:0;height:16%}
+.sth .tt{position:absolute;left:0;right:0;top:9%;text-align:center;font-size:19px;line-height:1.1}
+.sth .tc{position:absolute;left:16%;right:16%;top:46%;height:26%;display:block}
+</style>
+<style>
+/* ===== ক্যানভাস সাইজ, পেজের বাইরের জিনিস, প্রপার্টি প্যানেল ===== */
+.page{width:var(--pw,210mm);height:var(--phh,296.6mm);overflow:visible}
+.page:has(.sel){z-index:6}
+.imb:has(>img){border:0!important;background:transparent!important;border-radius:0!important}
+.imb img{object-fit:contain}
+body.cap .tb{outline:none!important}
+/* কাস্টম ব্যান্ড */
+.cu.p1::before{background:var(--hbg,var(--band,linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 70%,#000))));height:var(--hh,340px);clip-path:var(--hcl,var(--clip,ellipse(78% 100% at 50% 0)))}
+.cu.p1::after{background:var(--fbg,var(--band,linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 70%,#000))));height:var(--fh,150px);clip-path:var(--fcl,var(--clipf,ellipse(78% 100% at 50% 100%)))}
+.cu.p2>.pt,.cu.p3>.pt{background:var(--hbg,var(--band,linear-gradient(135deg,var(--c1),color-mix(in srgb,var(--c1) 70%,#000))));height:var(--hh,108px)}
+/* প্রপার্টি প্যানেল */
+#ins{position:fixed;right:0;top:calc(env(safe-area-inset-top,0px) + 52px);bottom:0;width:284px;background:var(--tl);border-left:1px solid var(--ln);overflow-y:auto;z-index:15;padding:4px 12px 70px;font-size:12.5px;display:none;box-shadow:-2px 0 16px rgba(0,0,0,.08)}
+body.ino #ins{display:block}
+body.ino #book{margin-right:284px}
+body.ino .tool{right:284px}
+.is{border-bottom:1px solid var(--ln);padding:9px 0}
+.is h5{margin:0 0 6px;font-size:12px;color:var(--ui)}
+.ir{display:flex;align-items:center;gap:6px;margin:6px 0;flex-wrap:wrap}
+.ir>label{width:78px;flex:none;opacity:.75}
+.ir input[type=number]{width:64px}
+.ir input[type=range]{flex:1;min-width:60px}
+.ir input[type=color]{width:34px;height:28px;padding:0;border:1px solid var(--ln);border-radius:7px;background:none}
+.ir input,.ir select,.ir button{font:inherit;font-size:12px;color:inherit;background:transparent;border:1px solid var(--ln);border-radius:7px;padding:4px 7px}
+.ir input[type=checkbox],.ir input[type=range]{border:0;padding:0}
+.ir button{cursor:pointer}.ir button:hover{background:rgba(124,58,237,.14)}
+.ir select{max-width:140px}
+.ly{display:flex;gap:6px;align-items:center;border:1px solid var(--ln);border-radius:8px;padding:5px 8px;margin:4px 0;cursor:pointer;width:100%;background:transparent;color:inherit;font:inherit;font-size:12px;text-align:left}
+.ly:hover{border-color:var(--ui)}.ly.on{background:rgba(124,58,237,.14)}.ly.out{border-color:#e67e22}
+@media (max-width:900px){body.ino #book{margin-right:0}body.ino .tool{right:0}#ins{width:270px;box-shadow:0 0 30px rgba(0,0,0,.4)}}
+@media print{
+#ins{display:none!important}
+body.ino #book{margin-right:0!important}
+.page{overflow:hidden!important}
+body.b #book{width:calc(var(--pw,210mm)*2)}
+body.a #book{width:var(--pw,210mm)}
+}
+</style>
+</head>
+<body>
+<header id="top">
+  <button id="menu" title="সাইডবার">☰</button>
+  <span class="logo">📘 <b>বুকলেট স্টুডিও</b></span>
+  <input id="dname" value="নামহীন ডিজাইন" aria-label="ডিজাইনের নাম">
+  <span id="stat">☁ সংযোগ হচ্ছে…</span>
+  <span class="fl"></span>
+  <button id="tsave" class="pri">☁ সেভ</button>
+  <details class="dd"><summary>⋯ মেনু</summary><div class="ddm">
+    <button id="tcopy">⧉ কপি করে সেভ করুন</button>
+    <button id="tnew">＋ নতুন ডিজাইন</button>
+    <button id="e3">🖨 A3 বুকলেট প্রিন্ট / PDF</button>
+    <button id="e4">🖨 A4 পেজ প্রিন্ট</button>
+    <button id="ej">⬇ ডিজাইন ফাইল সেভ (.json)</button>
+    <button id="ij">⬆ ডিজাইন ফাইল ইমপোর্ট</button>
+  </div></details>
+</header>
+<div class="tool">
+  <button id="sbt">☰ ডিজাইন/আইকন</button><button class="pri" id="addtb">＋ টেক্সট বক্স</button>
+  <button id="addim">🖼 লোগো/ছবি</button>
+  <select id="ic" title="কেমিস্ট্রি আইকন"><option value="">⚗️ কেমিস্ট্রি আইকন</option><option value="e⚗️">⚗️ ফ্লাস্ক</option><option value="e🧪">🧪 টেস্টটিউব</option><option value="e⚛️">⚛️ পরমাণু</option><option value="e🔬">🔬 মাইক্রোস্কোপ</option><option value="e🧬">🧬 DNA</option><option value="e🧫">🧫 পেট্রিডিশ</option><option value="e🔥">🔥 বার্নার</option><option value="e💧">💧 ফোঁটা</option><option value="e⚡">⚡ শক্তি</option><option value="e🧲">🧲 চুম্বক</option><option value="e🌡️">🌡️ থার্মোমিটার</option><option value="tH₂O">H₂O</option><option value="tCO₂">CO₂</option><option value="tNaCl">NaCl</option><option value="tC₆H₆">C₆H₆</option><option value="tH₂SO₄">H₂SO₄</option></select>
+  <select id="ds" title="ডিজাইন"><option value="1">ডিজাইন ১ ক্লাসিক</option><option value="2">ডিজাইন ২ মলিকিউল</option><option value="3">ডিজাইন ৩ ক্লিন</option></select>
+  <button id="wmb">💧 জলছাপ</button><select id="wsz"><option value="60%">মাঝারি</option><option value="35%">ছোট</option><option value="85%">বড়</option><option value="cover">পুরো পেজ</option></select><input type="range" id="wo" min="3" max="60" value="12" title="স্বচ্ছতা"><button id="wmx">জলছাপ মুছুন</button>
+  <span class="sep"></span>
+  <select id="fe" title="English font"></select>
+  <select id="fb" title="বাংলা ফন্ট"></select>
+  <input type="number" id="fs" min="6" max="200" title="সাইজ">
+  <input type="color" id="fc" title="লেখার রং">
+  <button id="bd"><b>B</b></button><button id="it"><i>I</i></button>
+  <button data-a="left">⇤</button><button data-a="center">↔</button><button data-a="right">⇥</button>
+  <span class="sep"></span>
+  <input type="color" id="bg" title="বক্সের রং"><button id="bgx">রং মুছুন</button>
+  <button id="bdx" title="বর্ডার স্বচ্ছ">বর্ডার ✕</button><label><input type="checkbox" id="tbg"> কার্ড স্বচ্ছ</label><label><input type="checkbox" id="tbd"> কার্ড বর্ডার স্বচ্ছ</label>
+  <input type="color" id="bc" title="বর্ডার রং" value="#c9a227">
+  <input type="range" id="rd" min="0" max="60" value="12" title="কোণ">
+  <button id="sh">ছায়া</button>
+  <button id="dup">⧉ কপি</button><button id="del">🗑</button>
+  <button id="up" title="উপরে">⬆</button><button id="dn" title="নিচে">⬇</button><button id="tp">⤒ প্রথমে</button><button id="ed">⤓ শেষে</button>
+  <label>ছবি নং <input type="number" id="mf" min="1" value="1"></label><label>→ অবস্থান <input type="number" id="mt" min="1" value="1"></label><button id="mv">সরান</button>
+  <label>🔍 ফটো জুম <input type="range" id="pz" min="100" max="500" value="100"></label>
+  <label><input type="checkbox" id="fn" checked> ফাইলের নাম→নাম</label>
+  <span class="sep"></span>
+  <label><input type="checkbox" id="allc" checked> সব কার্ডে</label>
+  <span class="sep"></span>
+  <button class="sw" style="background:#0f5c4a" data-a="#0f5c4a" data-b="#c9a227"></button>
+  <button class="sw" style="background:#1e3a6e" data-a="#1e3a6e" data-b="#e0a526"></button>
+  <button class="sw" style="background:#7a1f2b" data-a="#7a1f2b" data-b="#d4a24c"></button>
+  <button class="sw" style="background:#0e6e7a" data-a="#0e6e7a" data-b="#f2a541"></button>
+  <span class="sep"></span>
+  <label>🔍 <input type="range" id="zm" min="30" max="120" value="70"></label>
+  <button id="sv">💾 সেভ</button><button id="rs">↺ রিসেট</button>
+  <button class="pri" id="pb">🖨 A3 বুকলেট প্রিন্ট</button><button id="pa">A4 পেজ প্রিন্ট</button>
+  <span id="toast" style="font-size:12px;color:var(--c1)"></span>
+</div>
+<aside id="sb"><h4>🎨 ডিজাইন (ক্লিক করুন)</h4><div class="dg" id="dgrid"></div><h4>রং থিম</h4><div class="ig" id="tgrid"></div><h4>আইকন (ক্লিক করলে বর্তমান পেজে যোগ হবে)</h4><div class="ig" id="igrid"></div></aside>
+<div class="note">টিপস: বক্সের বাঁ-উপরের ⠿ ধরে সরান, ডান-নিচের কোনা টেনে ছোট-বড় করুন, লেখায় ক্লিক করে সরাসরি লিখুন। A3 প্রিন্টে Duplex → “Flip on short edge”, শিট ২টি: (পেজ ৪ | ১) এবং (পেজ ২ | ৩)।</div>
+<main id="book"></main>
+<div id="bb">
+  <button data-p="p1">১ কভার</button><button data-p="p2">২</button><button data-p="p3">৩</button><button data-p="p4">৪ ফরম</button>
+  <input type="range" id="z2" min="30" max="120" value="70" aria-label="জুম"><button id="fitb">ফিট</button>
+</div>
+<input type="file" id="ijf" accept=".json,application/json" hidden>
+<input type="file" id="fi" accept="image/*" hidden><input type="file" id="fm" accept="image/*" multiple hidden>
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const book=$('#book'),R=document.documentElement;
+let sel=null,cur=null;
+const EN=['Poppins','Montserrat','Playfair Display','Merriweather','Lato'],BN=['Hind Siliguri','Noto Sans Bengali','Noto Serif Bengali','Tiro Bangla','Baloo Da 2'];
+$('#fe').innerHTML=EN.map(f=>`<option>${f}</option>`).join('');
+$('#fb').innerHTML=BN.map(f=>`<option>${f}</option>`).join('');
+const hex=c=>'#'+c.match(/\d+/g).slice(0,3).map(n=>(+n).toString(16).padStart(2,'0')).join('');
+const zoom=()=>+book.style.zoom||.7;
+const toast=t=>{$('#toast').textContent=t;setTimeout(()=>$('#toast').textContent='',2200)};
+function ff(el){el.style.fontFamily=`'${el.dataset.en||EN[0]}','${el.dataset.bn||BN[0]}',sans-serif`}
+function select(el){
+  $$('.sel').forEach(e=>e.classList.remove('sel'));sel=el;if(!el)return;
+  el.classList.add('sel');const c=getComputedStyle(el);
+  $('#fs').value=Math.round(parseFloat(c.fontSize));$('#fc').value=hex(c.color);
+  $('#fe').value=el.dataset.en||EN[0];$('#fb').value=el.dataset.bn||BN[0];
+  if(el.classList.contains('card')){$('#mf').value=seq(el.parentNode).indexOf(el)+1;const im=el.querySelector('.ph img');$('#pz').value=im?(+im.dataset.z||1)*100:100}
+}
+const targets=()=>!sel?[]:(sel.classList.contains('card')&&$('#allc').checked)?[...sel.parentNode.children].filter(x=>x.classList.contains('card')):[sel];
+const T=f=>targets().forEach(f);
+
+function addTB(pg,o){
+  const d=document.createElement('div');d.className='tb'+(o.cls?' '+o.cls:'');const s=d.style;
+  s.left=o.x+'px';s.top=o.y+'px';if(o.w)s.width=o.w+'px';if(o.hh)s.height=o.hh+'px';
+  s.fontSize=(o.s||18)+'px';s.color=o.c||'#222';s.textAlign=o.a||'left';
+  if(o.b)s.fontWeight=700;if(o.bg)s.background=o.bg;if(o.bd)s.border='2px solid '+o.bd;
+  s.borderRadius=(o.r||0)+'px';if(o.sh)s.boxShadow='0 10px 30px rgba(0,0,0,.18)';
+  d.dataset.en=o.en||EN[0];d.dataset.bn=o.bn||BN[0];ff(d);
+  d.innerHTML=`<div class="h">⠿</div>`+(o.cls=='im'?`<div class="imb">${o.h||'LOGO'}</div>`:`<div class="tx" contenteditable="true">${o.h}</div>`);
+  pg.append(d);return d;
+}
+const K={s:['শিক্ষার্থীর নাম','স্কুলের নাম'],u:['শিক্ষার্থীর নাম','বিশ্ববিদ্যালয় / বিভাগ'],t:['শিক্ষার্থীর নাম','শ্রেণি / ফলাফল']};
+function card(a=K.s[0],b=K.s[1]){
+  const d=document.createElement('div');d.className='card';d.dataset.en=EN[0];d.dataset.bn=BN[0];
+  d.innerHTML=`<div class="g" title="ধরে সরান">⠿</div><button class="x" title="মুছুন">×</button><div class="ph">+ ছবি</div><div class="nm" contenteditable="true">${a}</div><div class="sc" contenteditable="true">${b}</div>`;
+  return d;
+}
+const bar=(c=3,p=170)=>`<div class="bar"><label>কলাম <select class="cols">${[2,3,4,5,6].map(n=>`<option${n==c?' selected':''}>${n}</option>`).join('')}</select></label><label>কার্ড <input type="color" class="cbg" value="#ffffff"></label><label>বর্ডার <input type="color" class="cbd" value="#c9a227"></label><label>ছবি <input type="range" class="cph" min="60" max="420" value="${p}"></label><button class="bulk">📷 সব ছবি</button><span class="cnt"></span><button class="add">+ ছাত্র</button><button class="add5">+ ৫টি</button></div>`;
+const listPg=(id,t)=>`<section class="page p${id}" id="p${id}"><div class="pt"><div class="ptt" contenteditable="true">${t}</div>${bar()}</div><div class="grid"></div><div class="warn">⚠ জায়গা শেষ — কলাম/ছবির উচ্চতা কমান বা কার্ড সরান</div></section>`;
+const fld=(l,w)=>`<div class="f${w?' w':''}"${w?' style="grid-column:1/3"':''}><span contenteditable="true">${l}</span><div class="v" contenteditable="true"></div></div>`;
+
+function build(){
+  book.innerHTML=`<section class="page p1" id="p1"><div class="fr"></div></section>`+listPg(2,'শিক্ষার্থী তালিকা')+listPg(3,'শিক্ষার্থী তালিকা')+
+  `<section class="page p4" id="p4">
+   <div class="sp sec"><div class="pt"><div class="ptt" contenteditable="true">গত বছর বিভিন্ন বিশ্ববিদ্যালয়ে চান্সপ্রাপ্ত শিক্ষার্থী</div>${bar(4,90)}</div><div class="grid" data-k="u" style="--cols:4;--ph:90px"></div></div>
+   <div class="sp sec"><div class="pt"><div class="ptt" contenteditable="true">বর্তমান ক্লাস টপার শিক্ষার্থী</div>${bar(4,90)}</div><div class="grid" data-k="t" style="--cols:4;--ph:90px"></div></div>
+   <div class="sp B"><div class="bl"><div class="big" contenteditable="true">২০%</div><div class="sm" contenteditable="true">বিশেষ ছাড়</div></div><div class="br" contenteditable="true"><b style="font-size:1.3em">স্কলারশিপ / আর্লি বার্ড অফার</b><br>নির্দিষ্ট তারিখের মধ্যে ভর্তি হলে ভর্তি ফিতে বিশেষ ছাড়।<br>কুপন কোড: ____________</div></div>
+   <div class="cut">✂ - - - - - - - - এখান থেকে কাটুন / Cut here - - - - - - - - ✂</div>
+   <div class="sp C"><h3 contenteditable="true">ভর্তি রেজিস্ট্রেশন ফরম / Registration Form</h3><div class="ct"><div class="ph">+ ছবি</div><div class="cg">${fld('শিক্ষার্থীর নাম',1)}${fld('পিতার নাম')}${fld('মাতার নাম')}${fld('জন্ম তারিখ')}${fld('ভর্তির শ্রেণি')}</div></div><div class="cg">${fld('পূর্বের স্কুল')}${fld('মোবাইল নম্বর')}${fld('ঠিকানা',1)}</div><div class="sig"><div contenteditable="true">অভিভাবকের স্বাক্ষর</div><div contenteditable="true">তারিখ</div><div contenteditable="true">অফিসের স্বাক্ষর</div></div></div>
+  </section>`;
+  const p1=$('#p1');
+  addTB(p1,{cls:'im',x:347,y:34,w:100,hh:100,s:15});
+  addTB(p1,{x:97,y:150,w:600,s:40,c:'#fff',a:'center',b:1,h:'আপনার প্রতিষ্ঠানের নাম'});
+  addTB(p1,{x:97,y:208,w:600,s:20,c:'#f4e3a1',a:'center',en:'Montserrat',h:'YOUR INSTITUTION NAME'});
+  addTB(p1,{x:197,y:254,w:400,s:16,c:'#fff',a:'center',h:'জ্ঞান • নৈতিকতা • সাফল্য'});
+  addTB(p1,{x:112,y:390,w:570,s:18,c:'#333',a:'center',bg:'#fff',bd:'var(--c2)',r:20,sh:1,h:'<div style="font-size:2.1em;font-weight:800;color:var(--c1)">ভর্তি চলছে</div><div style="font-size:1.3em;font-weight:700;color:var(--c2)">শিক্ষাবর্ষ ২০২৬–২০২৭</div><div style="margin-top:10px">প্লে থেকে ৫ম শ্রেণি পর্যন্ত</div>'});
+  addTB(p1,{x:222,y:640,w:350,s:20,c:'#fff',a:'center',b:1,bg:'var(--c1)',r:40,en:'Montserrat',h:'Admissions Open 2026'});
+  addTB(p1,{x:112,y:730,w:570,s:16,c:'#444',a:'center',bg:'rgba(255,255,255,.75)',bd:'var(--c2)',r:16,h:'<b style="color:var(--c1)">আমাদের বৈশিষ্ট্য</b><br>✔ অভিজ্ঞ শিক্ষক &nbsp; ✔ আধুনিক ক্লাসরুম<br>✔ নিরাপদ পরিবেশ &nbsp; ✔ ছোট ব্যাচ'});
+  addTB(p1,{x:77,y:1004,w:640,s:15,c:'#fff',a:'center',h:'<b>প্রতিষ্ঠানের পরিচিতি</b> — এখানে সংক্ষিপ্ত বিবরণ লিখুন<br>📍 ঠিকানা: গ্রাম, ইউনিয়ন, উপজেলা, জেলা<br>📞 01XXX-XXXXXX &nbsp; ✉ info@example.com'});
+  [['🧪',40,40],['⚗️',690,40],['⚛️',36,400],['🧬',704,400],['🔬',36,990]].forEach(([h,x,y])=>addTB(p1,{x,y,w:64,s:44,a:'center',h}));
+  addTB(p1,{x:112,y:860,w:570,s:24,c:'var(--c1)',a:'center',b:1,en:'Montserrat',h:'H₂O &nbsp;•&nbsp; NaCl &nbsp;•&nbsp; C₆H₆ &nbsp;•&nbsp; CO₂'});
+  $$('#p2 .grid,#p3 .grid').forEach(g=>{for(let i=0;i<9;i++)g.append(card())});
+  $('#p3 .grid').style.setProperty('--ph','140px');
+  $$('#p4 .grid').forEach(g=>{for(let i=0;i<4;i++)g.append(card(...K[g.dataset.k]))});
+  $('#p3').append($('#p4 .B'));
+  const C=$('#p4 .C');C.insertAdjacentHTML('afterend',`<div class="sp R"><div class="rh" contenteditable="true">ভর্তি রেজিস্ট্রেশন ফরম / Registration Form</div><div class="rb">${fld('শিক্ষার্থীর নাম')}${fld('শ্রেণি')}${fld('পিতার নাম')}${fld('অভিভাবকের স্বাক্ষর')}${fld('ঠিকানা',1)}</div></div>`);C.remove();
+  $('#p4').insertAdjacentHTML('beforeend','<div class="warn">⚠ জায়গা শেষ — কার্ড কমান বা ছবির উচ্চতা কমান</div>');
+}
+const saved=(()=>{try{return localStorage.getItem('bk26')}catch(e){return null}})();
+if(saved)book.innerHTML=saved;else build();
+cur=$('#p1');
+$$('.grid').forEach(g=>{const b=g.parentNode.querySelector('.cols'),r=g.parentNode.querySelector('.cph');if(b)b.value=g.style.getPropertyValue('--cols')||3;if(r)r.value=parseInt(g.style.getPropertyValue('--ph'))||170});
+const fit=Math.min(.8,(innerWidth-24)/794);book.style.zoom=fit;$('#zm').value=fit*100;
+$('#zm').oninput=e=>book.style.zoom=e.target.value/100;
+
+function chk(){$$('.page').forEach(p=>p.classList.remove('over'));$$('.grid').forEach(g=>{if(g.scrollHeight>g.clientHeight+2)g.closest('.page').classList.add('over');const c=g.parentNode.querySelector('.cnt'),l=[...g.children].filter(x=>x.classList.contains('card')),gb=g.getBoundingClientRect().bottom;if(c)c.textContent=`মোট ${seq(g).length} • দেখা যাচ্ছে ${l.filter(x=>x.getBoundingClientRect().bottom<=gb+1).length}`})}
+chk();
+
+/* select / drag */
+book.addEventListener('pointerdown',e=>{
+  const pg=e.target.closest('.page');if(pg)cur=pg;const sc=e.target.closest('.sec,.page');if(sc&&sc.querySelector('.grid'))curG=sc.querySelector('.grid');
+  const el=e.target.closest('.tb,.card,.sp');
+  if(!el){select(null);return}
+  select(el);
+  if(e.target.classList.contains('g'))el.draggable=true;
+  if(e.target.classList.contains('h')){
+    e.preventDefault();const z=zoom(),sx=e.clientX,sy=e.clientY,ox=el.offsetLeft,oy=el.offsetTop;
+    const mv=ev=>{el.style.left=ox+(ev.clientX-sx)/z+'px';el.style.top=oy+(ev.clientY-sy)/z+'px'};
+    const up=()=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up)};
+    addEventListener('pointermove',mv);addEventListener('pointerup',up);
+  }
+});
+let dc=null;
+book.addEventListener('dragstart',e=>{dc=e.target.closest('.card')});
+book.addEventListener('dragend',()=>{if(dc)dc.draggable=false;dc=null});
+book.addEventListener('dragover',e=>{if(dc)e.preventDefault()});
+book.addEventListener('drop',e=>{
+  if(!dc)return;e.preventDefault();
+  const t=e.target.closest('.card'),g=e.target.closest('.grid');
+  if(t&&t!==dc)t.before(dc);else if(g&&!t)g.append(dc);chk();
+});
+
+/* images */
+const fi=$('#fi');let onImg=null,imgOpt={};
+function pick(cb,max,type){onImg=cb;imgOpt={max:max||900,type:type||'image/jpeg'};fi.value='';fi.click()}
+fi.onchange=()=>{
+  const f=fi.files[0];if(!f)return;const r=new FileReader();
+  r.onload=()=>{const i=new Image();i.onload=()=>{
+    const s=Math.min(1,imgOpt.max/Math.max(i.width,i.height)),c=document.createElement('canvas');
+    c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);
+    onImg(c.toDataURL(imgOpt.type,.88));
+  };i.src=r.result};r.readAsDataURL(f);
+};
+book.addEventListener('click',e=>{
+  const x=e.target.closest('.x');if(x){x.closest('.card').remove();select(null);chk();return}
+  const ph=e.target.closest('.ph');if(ph&&!ph.querySelector('img'))pick(u=>ph.innerHTML=`<img src="${u}" draggable="false">`);
+  const b=e.target.closest('.bar button');
+  if(b){const g=b.closest('.sec,.page').querySelector('.grid');if(b.classList.contains('bulk')){bgrid=g;fm.value='';fm.click();return}const n=b.classList.contains('add5')?5:1;for(let i=0;i<n;i++)g.append(card(...K[g.dataset.k||'s']));chk()}
+});
+book.addEventListener('dblclick',e=>{const im=e.target.closest('.im .imb');if(im)pick(u=>im.innerHTML=`<img src="${u}" draggable="false">`,700,'image/png')});
+book.addEventListener('input',e=>{
+  const b=e.target.closest('.bar');
+  if(b){const g=b.closest('.sec,.page').querySelector('.grid'),c=e.target.className,v=e.target.value;
+    if(c=='cols')g.style.setProperty('--cols',v);if(c=='cbg')g.style.setProperty('--cbg',v);
+    if(c=='cbd')g.style.setProperty('--cbd',v);if(c=='cph')g.style.setProperty('--ph',v+'px')}
+  chk();
+});
+
+/* toolbar */
+$('#addtb').onclick=()=>select(addTB(cur,{x:120,y:300,w:320,s:20,h:'নতুন লেখা এখানে লিখুন',bg:'#fff',bd:'var(--c2)',r:12,sh:1}));
+$('#addim').onclick=()=>pick(u=>{const t=addTB(cur,{cls:'im',x:150,y:300,w:200,hh:150,h:`<img src="${u}" draggable="false">`});t.querySelector('.imb').style.borderRadius='8px';t.querySelector('.imb').style.border='0';t.querySelector('.imb').style.background='transparent';select(t)},900,'image/png');
+$('#fe').onchange=e=>T(t=>{t.dataset.en=e.target.value;ff(t)});
+$('#fb').onchange=e=>T(t=>{t.dataset.bn=e.target.value;ff(t)});
+$('#fs').oninput=e=>T(t=>t.style.fontSize=e.target.value+'px');
+$('#fc').oninput=e=>T(t=>t.style.color=e.target.value);
+$('#bd').onclick=()=>T(t=>t.style.fontWeight=t.style.fontWeight=='700'?'400':'700');
+$('#it').onclick=()=>T(t=>t.style.fontStyle=t.style.fontStyle=='italic'?'normal':'italic');
+$$('[data-a][data-a^=l],[data-a=center],[data-a=right]').forEach(b=>b.onclick=()=>T(t=>t.style.textAlign=b.dataset.a));
+$('#bg').oninput=e=>T(t=>t.style.background=e.target.value);
+$('#bgx').onclick=()=>T(t=>t.style.background='transparent');
+$('#bc').oninput=e=>T(t=>t.style.border='2px solid '+e.target.value);
+$('#rd').oninput=e=>T(t=>t.style.borderRadius=e.target.value+'px');
+$('#sh').onclick=()=>T(t=>t.style.boxShadow=t.style.boxShadow?'':'0 10px 30px rgba(0,0,0,.18)');
+$('#del').onclick=()=>{if(sel&&!sel.classList.contains('sp')){sel.remove();select(null);chk()}};
+$('#dup').onclick=()=>{if(!sel||sel.classList.contains('sp'))return;const c=sel.cloneNode(true);c.classList.remove('sel');
+  if(sel.classList.contains('tb')){c.style.left=sel.offsetLeft+24+'px';c.style.top=sel.offsetTop+24+'px';sel.parentNode.append(c)}else sel.after(c);select(c);chk()};
+$$('.sw').forEach(b=>b.onclick=()=>{R.style.setProperty('--c1',b.dataset.a);R.style.setProperty('--c2',b.dataset.b)});
+$('#sv').onclick=()=>{select(null);try{localStorage.setItem('bk26',book.innerHTML);localStorage.setItem('bk26t',R.getAttribute('style')||'');toast('সেভ হয়েছে ✓')}catch(e){toast('সেভ হয়নি (ছবি বড়)')}};
+try{const t=localStorage.getItem('bk26t');if(t&&saved)R.setAttribute('style',t)}catch(e){}
+$('#rs').onclick=()=>{try{localStorage.removeItem('bk26');localStorage.removeItem('bk26t')}catch(e){}location.reload()};
+
+/* chemistry icons, designs, watermark */
+$('#ic').onchange=e=>{const v=e.target.value;if(!v)return;const em=v[0]=='e';select(addTB(cur,{x:300,y:260,w:em?90:170,s:em?58:34,a:'center',b:!em,c:'var(--c1)',h:v.slice(1)}));e.target.value=''};
+const P2=`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='60' height='104'%3E%3Cg fill='none' stroke='%23888' stroke-opacity='.22' stroke-width='1.4'%3E%3Cpath d='M30 4l26 15v30L30 64 4 49V19z'/%3E%3Cpath d='M30 64v22'/%3E%3C/g%3E%3Ccircle cx='30' cy='88' r='3' fill='%23888' fill-opacity='.25'/%3E%3C/svg%3E")`;
+const DS={1:['radial-gradient(color-mix(in srgb,var(--c1) 8%,transparent) 1.5px,transparent 2px)','20px 20px','ellipse(78% 100% at 50% 0)','ellipse(78% 100% at 50% 100%)'],2:[P2,'60px 104px','polygon(0 0,100% 0,100% 70%,0 100%)','polygon(0 34%,100% 0,100% 100%,0 100%)'],3:['repeating-linear-gradient(45deg,transparent 0 18px,color-mix(in srgb,var(--c1) 7%,transparent) 18px 19px)','auto','polygon(0 0,100% 0,100% 84%,50% 100%,0 84%)','polygon(0 14%,50% 0,100% 14%,100% 100%,0 100%)']};
+$('#ds').onchange=e=>['--pat','--ps','--clip','--clipf'].forEach((k,i)=>R.style.setProperty(k,DS[e.target.value][i]));
+const wmEl=(pg,mk)=>{let w=pg.querySelector('.wm');if(!w&&mk){w=document.createElement('div');w.className='wm';pg.prepend(w)}return w};
+$('#wmb').onclick=()=>pick(u=>{const w=wmEl(cur,1);w.style.backgroundImage=`url("${u}")`;w.style.backgroundSize=$('#wsz').value;w.style.opacity=$('#wo').value/100;toast('জলছাপ যোগ হয়েছে ✓')},1100,'image/png');
+$('#wsz').onchange=e=>{const w=wmEl(cur);if(w)w.style.backgroundSize=e.target.value};
+$('#wo').oninput=e=>{const w=wmEl(cur);if(w)w.style.opacity=e.target.value/100};
+$('#wmx').onclick=()=>{const w=wmEl(cur);if(w)w.remove()};
+/* v3: আইকন, ডিজাইন, ছবির টুলস */
+let curG=null,bgrid=null;
+const cards=g=>[...g.children].filter(x=>x.classList.contains('card'));
+const IC={atom:'<circle cx="24" cy="24" r="3" fill="currentColor"/><ellipse cx="24" cy="24" rx="20" ry="8"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(60 24 24)"/><ellipse cx="24" cy="24" rx="20" ry="8" transform="rotate(120 24 24)"/>',benzene:'<path d="M24 5l16.5 9.5v19L24 43 7.5 33.5v-19z"/><path d="M24 13l9.5 5.5v11L24 35l-9.5-5.5v-11z"/>',flask:'<path d="M19 5h10M21 5v14L8 40a3 3 0 002.6 4.5h26.8A3 3 0 0040 40L27 19V5"/><path d="M13 31h22"/>',beaker:'<path d="M12 6h24M15 6v34a3 3 0 003 3h12a3 3 0 003-3V6"/><path d="M15 22h18M15 31h8"/>',tube:'<path d="M18 5h12M20 5v32a4 4 0 008 0V5"/><path d="M20 24h8"/>',molecule:'<circle cx="12" cy="14" r="6"/><circle cx="36" cy="14" r="6"/><circle cx="24" cy="36" r="7"/><path d="M17 17l5 13M31 17l-5 13M18 14h12"/>',dna:'<path d="M14 4c0 14 20 16 20 40M34 4c0 14-20 16-20 40M16 14h16M14 24h20M16 34h16"/>',cap:'<path d="M3 17L24 8l21 9-21 9z"/><path d="M11 21v10c0 3 6 6 13 6s13-3 13-6V21M45 17v13"/>',trophy:'<path d="M14 6h20v12a10 10 0 01-20 0zM14 10H6c0 8 3 12 8 12M34 10h8c0 8-3 12-8 12M24 28v8M16 42h16M19 36h10v6H19z"/>',book:'<path d="M24 12c-4-4-11-5-18-4v30c7-1 14 0 18 4 4-4 11-5 18-4V8c-7-1-14 0-18 4zM24 12v30"/>',bulb:'<path d="M17 36h14M19 42h10M24 4a14 14 0 00-8 25c1.5 1.5 2 3 2 5h12c0-2 .5-3.5 2-5a14 14 0 00-8-25z"/>'};
+const IN={atom:'অ্যাটম',benzene:'বেনজিন রিং',flask:'ফ্লাস্ক (লাইন)',beaker:'বিকার',tube:'টেস্টটিউব (লাইন)',molecule:'অণু',dna:'DNA (লাইন)',cap:'গ্র্যাজুয়েশন ক্যাপ',trophy:'ট্রফি',book:'বই',bulb:'আইডিয়া'};
+$('#ic').insertAdjacentHTML('beforeend','<optgroup label="লাইন আইকন (রং বদলানো যায়)">'+Object.keys(IC).map(k=>`<option value="s${k}">${IN[k]}</option>`).join('')+'</optgroup><optgroup label="আরও">'+['🎓','🏆','📚','🏅','⭐','💡','🧑‍🔬','🌱','♻️','🧯'].map(x=>`<option value="e${x}">${x}</option>`).join('')+'</optgroup>');
+$('#ic').onchange=e=>{const v=e.target.value;if(!v)return;const k=v[0],em=k=='e',sv=k=='s';select(addTB(cur,{x:300,y:260,w:sv?110:em?90:170,s:em?58:34,a:'center',b:!em&&!sv,c:'var(--c1)',h:sv?`<svg viewBox="0 0 48 48" width="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${IC[v.slice(1)]}</svg>`:v.slice(1)}));e.target.value=''};
+const P6=`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cpath d='M12 14L58 34 34 72z' fill='none' stroke='%23888' stroke-opacity='.2' stroke-width='1.3'/%3E%3Cg fill='%23888' fill-opacity='.22'%3E%3Ccircle cx='12' cy='14' r='5'/%3E%3Ccircle cx='58' cy='34' r='4'/%3E%3Ccircle cx='34' cy='72' r='6'/%3E%3C/g%3E%3C/svg%3E")`;
+Object.assign(DS,{4:['radial-gradient(circle,color-mix(in srgb,var(--c1) 9%,transparent) 2.5px,transparent 3px)','30px 30px','circle(92% at 50% 0)','circle(92% at 50% 100%)'],5:['linear-gradient(color-mix(in srgb,var(--c1) 8%,transparent) 1px,transparent 1px),linear-gradient(90deg,color-mix(in srgb,var(--c1) 8%,transparent) 1px,transparent 1px)','24px 24px','polygon(0 0,100% 0,100% 100%,0 80%)','polygon(0 0,100% 20%,100% 100%,0 100%)'],6:[P6,'90px 90px','ellipse(100% 100% at 50% 0)','ellipse(100% 100% at 50% 100%)'],7:['none','auto','inset(0 0 40px 0)','inset(40px 0 0 0)']});
+$('#ds').insertAdjacentHTML('beforeend','<option value="4">ডিজাইন ৪ সার্কেল ডট</option><option value="5">ডিজাইন ৫ ল্যাব খাতা</option><option value="6">ডিজাইন ৬ অ্যাটম নেটওয়ার্ক</option><option value="7">ডিজাইন ৭ সরল ব্যান্ড</option>');
+/* ছবি: সব একসাথে আপলোড */
+const fm=$('#fm');
+function shrink(f,max){return new Promise(r=>{const i=new Image();i.onload=()=>{const s=Math.min(1,max/Math.max(i.width,i.height)),c=document.createElement('canvas');c.width=i.width*s;c.height=i.height*s;c.getContext('2d').drawImage(i,0,0,c.width,c.height);URL.revokeObjectURL(i.src);r(c.toDataURL('image/jpeg',.8))};i.src=URL.createObjectURL(f)})}
+fm.onchange=async()=>{
+  const g=bgrid;if(!g)return;const k=K[g.dataset.k||'s'];
+  const fs=[...fm.files].sort((a,b)=>a.name.localeCompare(b.name,undefined,{numeric:true}));
+  for(let i=0;i<fs.length;i++){
+    toast(`ছবি ${i+1}/${fs.length} …`);const u=await shrink(fs[i],520);
+    let c=seq(g).find(x=>!x.querySelector('.ph img'));if(!c){c=card(...k);(g.closest('#p2,#p3')?$('#p3 .grid'):g).append(c)}
+    c.querySelector('.ph').innerHTML=`<img src="${u}" draggable="false">`;
+    if($('#fn').checked){const nm=c.querySelector('.nm');if(nm.firstChild&&nm.firstChild.textContent==k[0])nm.firstChild.textContent=fs[i].name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ')}
+  }
+  toast('সব ছবি যোগ হয়েছে ✓');chk();
+};
+/* ক্রম বদল */
+const isC=()=>sel&&sel.classList.contains('card');
+function mvTo(c,pos){const g=c.parentNode;c.remove();const l=cards(g),t=l[Math.max(0,pos-1)];if(t)t.before(c);else g.append(c);select(c);chk()}
+$('#mv').onclick=()=>{const g=isC()?sel.parentNode:curG;if(!g)return toast('আগে একটি সেকশনে ক্লিক করুন');const c=cards(g)[$('#mf').value-1];if(!c)return toast('এই নম্বরে কার্ড নেই');mvTo(c,+$('#mt').value)};
+$('#up').onclick=()=>{if(!isC())return;const p=sel.previousElementSibling;if(p&&p.classList.contains('card'))p.before(sel);chk();select(sel)};
+$('#dn').onclick=()=>{if(!isC())return;const n=sel.nextElementSibling;if(n&&n.classList.contains('card'))n.after(sel);chk();select(sel)};
+$('#tp').onclick=()=>isC()&&mvTo(sel,1);
+$('#ed').onclick=()=>isC()&&mvTo(sel,99999);
+/* ছবির জুম ও পজিশন */
+function ap(im,z,x,y){z=Math.min(5,Math.max(1,z));const m=(z-1)/2;x=Math.max(-m,Math.min(m,x));y=Math.max(-m,Math.min(m,y));Object.assign(im.dataset,{z,x,y});im.style.transform=`translate(${x*100}%,${y*100}%) scale(${z})`}
+book.addEventListener('pointerdown',e=>{const im=e.target.closest('.ph img');if(!im)return;e.preventDefault();const ph=im.parentNode,sx=e.clientX,sy=e.clientY,z0=+im.dataset.z||1,x0=+im.dataset.x||0,y0=+im.dataset.y||0,k=zoom();
+  const mv=ev=>ap(im,z0,x0+(ev.clientX-sx)/k/ph.clientWidth,y0+(ev.clientY-sy)/k/ph.clientHeight);
+  const up=()=>{removeEventListener('pointermove',mv);removeEventListener('pointerup',up)};addEventListener('pointermove',mv);addEventListener('pointerup',up)});
+book.addEventListener('wheel',e=>{const im=e.target.closest('.ph img');if(!im)return;e.preventDefault();ap(im,(+im.dataset.z||1)*(e.deltaY<0?1.08:.93),+im.dataset.x||0,+im.dataset.y||0);$('#pz').value=im.dataset.z*100},{passive:false});
+$('#pz').oninput=e=>{const im=sel&&sel.matches('.card,.C')&&sel.querySelector('.ph img');if(im)ap(im,e.target.value/100,+im.dataset.x||0,+im.dataset.y||0)};
+book.addEventListener('dblclick',e=>{const ph=e.target.closest('.ph');if(ph&&ph.querySelector('img'))pick(u=>ph.innerHTML=`<img src="${u}" draggable="false">`)});
+/* v4: সাইডবার, ডিজাইন, ক্রম */
+function seq(g){return g.closest('#p2,#p3')?$$('#p2 .grid .card,#p3 .grid .card'):[...g.children].filter(x=>x.classList.contains('card'))}
+Object.assign(IC,{star:'<path d="M24 5l5.5 11.5 12.5 1.7-9.2 8.8 2.3 12.5L24 33.5 12.9 39.5l2.3-12.5L6 18.2l12.5-1.7z"/>',medal:'<circle cx="24" cy="30" r="10"/><path d="M17 22L12 4h9l3 9M31 22l5-18h-9l-3 9"/>',pencil:'<path d="M8 40l2-8L32 10a4 4 0 016 6L16 38zM28 14l6 6"/>',drop:'<path d="M24 5C16 16 11 22 11 29a13 13 0 0026 0C37 22 32 16 24 5z"/><path d="M18 30a6 6 0 006 6"/>',magnet:'<path d="M10 6h8v18a6 6 0 0012 0V6h8v18a14 14 0 01-28 0zM10 14h8M30 14h8"/>',flame:'<path d="M24 4c2 8 12 12 12 24a12 12 0 01-24 0c0-6 4-8 5-14 3 2 4 4 4 8 3-4 4-10 3-18z"/>',scope:'<path d="M20 6l8 3-6 16-8-3zM17 22l4 9M12 40h26M18 34a12 12 0 0016-5"/>'});
+Object.assign(IN,{star:'তারা',medal:'মেডেল',pencil:'কলম',drop:'ফোঁটা',magnet:'চুম্বক',flame:'আগুন',scope:'অণুবীক্ষণ'});
+function addIc(v){const k=v[0],em=k=='e',sv=k=='s',j=()=>200+Math.random()*200|0;select(addTB(cur,{x:j(),y:j(),w:sv?110:em?90:170,s:em?58:34,a:'center',b:!em&&!sv,c:'var(--c1)',h:sv?`<svg viewBox="0 0 48 48" width="100%" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${IC[v.slice(1)]}</svg>`:v.slice(1)}))}
+Object.assign(DS,{8:['repeating-linear-gradient(0deg,transparent 0 23px,color-mix(in srgb,var(--c1) 7%,transparent) 23px 24px)','auto','inset(0 0 0 0)','inset(0 0 0 0)',['12px','7px double var(--c2)','0px']],9:['radial-gradient(color-mix(in srgb,var(--c2) 18%,transparent) 1.5px,transparent 2px)','16px 16px','ellipse(62% 100% at 50% 0)','ellipse(62% 100% at 50% 100%)',['20px','3px solid var(--c2)','40px']],10:[P2,'100px 174px','polygon(0 0,100% 0,100% 64%,50% 100%,0 64%)','polygon(0 36%,50% 0,100% 36%,100% 100%,0 100%)',['16px','2px dashed var(--c2)','8px']],11:['radial-gradient(color-mix(in srgb,var(--c1) 7%,transparent) 1.5px,transparent 2px)','18px 18px','polygon(0 0,100% 0,100% 70%,90% 76%,78% 78%,66% 74%,52% 68%,38% 70%,24% 78%,10% 80%,0 74%)','polygon(0 30%,10% 22%,24% 20%,38% 28%,52% 34%,66% 30%,78% 22%,90% 20%,100% 26%,100% 100%,0 100%)'],12:['repeating-linear-gradient(135deg,transparent 0 14px,color-mix(in srgb,var(--c2) 14%,transparent) 14px 16px)','auto','polygon(0 0,100% 0,100% 100%,0 82%)','polygon(0 0,100% 38%,100% 100%,0 100%)',['0px','0px solid transparent','0px']]});
+const DN={1:'ক্লাসিক',2:'মলিকিউল',3:'ক্লিন V',4:'সার্কেল ডট',5:'ল্যাব খাতা',6:'অ্যাটম নেটওয়ার্ক',7:'সরল ব্যান্ড',8:'ডাবল ফ্রেম',9:'রাউন্ড কর্নার',10:'বড় হেক্স',11:'ওয়েভ',12:'ডায়াগনাল'};
+function setDesign(n){const d=DS[n];['--pat','--ps','--clip','--clipf'].forEach((k,i)=>R.style.setProperty(k,d[i]));const f=d[4]||['16px','2px solid var(--c2)','8px'];['--fi','--fb','--fr'].forEach((k,i)=>R.style.setProperty(k,f[i]));$$('.dt').forEach(b=>b.classList.toggle('on',b.dataset.d==n))}
+Object.keys(DS).forEach(n=>{const d=DS[n],b=document.createElement('button');b.className='dt';b.dataset.d=n;b.innerHTML='<i><b></b><s></s></i>'+n+'. '+DN[n];const i=b.firstChild;i.style.backgroundImage=d[0];i.style.backgroundSize=d[1].replace(/(\d+)px/g,(m,v)=>v/5+'px');i.children[0].style.clipPath=d[2];i.children[1].style.clipPath=d[3];$('#dgrid').append(b)});
+$('#dgrid').onclick=e=>{const b=e.target.closest('.dt');if(b)setDesign(b.dataset.d)};
+[['#0f5c4a','#c9a227'],['#1e3a6e','#e0a526'],['#7a1f2b','#d4a24c'],['#0e6e7a','#f2a541'],['#3f3a8c','#f0b429'],['#243038','#d4af37'],['#1b5e20','#9ccc65'],['#9d2a5b','#f4b942']].forEach(([a,c])=>{const b=document.createElement('button');b.className='sw';b.style.background=a;b.onclick=()=>{R.style.setProperty('--c1',a);R.style.setProperty('--c2',c)};$('#tgrid').append(b)});
+const ig=$('#igrid');
+Object.keys(IC).forEach(k=>{const b=document.createElement('button');b.dataset.i='s'+k;b.title=IN[k];b.innerHTML=`<svg viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">${IC[k]}</svg>`;ig.append(b)});
+['⚗️','🧪','⚛️','🔬','🧬','🧫','🔥','💧','⚡','🧲','🌡️','🎓','🏆','📚','🏅','⭐','💡','🌱','♻️','🧯'].forEach(x=>{const b=document.createElement('button');b.dataset.i='e'+x;b.textContent=x;ig.append(b)});
+['H₂O','CO₂','NaCl','C₆H₆','H₂SO₄','NaOH','HCl','CH₄','O₂','Fe'].forEach(x=>{const b=document.createElement('button');b.className='tf';b.dataset.i='t'+x;b.textContent=x;ig.append(b)});
+ig.onclick=e=>{const b=e.target.closest('button');if(b)addIc(b.dataset.i)};
+$('#ic').onchange=e=>{if(e.target.value)addIc(e.target.value);e.target.value=''};
+function fixTh(){document.body.style.setProperty('--th',$('.tool').getBoundingClientRect().bottom+'px')}
+$('#sbt').onclick=()=>{document.body.classList.toggle('sbo');fixTh()};
+addEventListener('resize',fixTh);if(innerWidth>900)document.body.classList.add('sbo');fixTh();setTimeout(fixTh,400);
+/* ক্রম (২-৩ পেজ একসাথে সিরিয়াল) */
+function mvTo2(c,pos){const g=c.parentNode;c.remove();const l=seq(g),t=l[Math.max(0,pos-1)];if(t)t.before(c);else(g.closest('#p2,#p3')?$('#p3 .grid'):g).append(c);select(c);chk()}
+$('#mv').onclick=()=>{const g=isC()?sel.parentNode:curG;if(!g)return toast('আগে একটি সেকশনে ক্লিক করুন');const c=seq(g)[$('#mf').value-1];if(!c)return toast('এই নম্বরে কার্ড নেই');mvTo2(c,+$('#mt').value)};
+$('#up').onclick=()=>{if(!isC())return;const l=seq(sel.parentNode),i=l.indexOf(sel);if(i>0)l[i-1].before(sel);chk();select(sel)};
+$('#dn').onclick=()=>{if(!isC())return;const l=seq(sel.parentNode),i=l.indexOf(sel);if(i<l.length-1)l[i+1].after(sel);chk();select(sel)};
+$('#tp').onclick=()=>isC()&&mvTo2(sel,1);
+$('#ed').onclick=()=>isC()&&mvTo2(sel,99999);
+/* v5: ছবি কার্ড, স্বচ্ছ বর্ডার */
+function card(a=K.s[0],b){
+  if(b===K.s[1])b='';
+  const d=document.createElement('div');d.className='card';d.dataset.en=EN[0];d.dataset.bn=BN[0];
+  d.innerHTML=`<div class="g" title="ধরে সরান">⠿</div><button class="x" title="মুছুন">×</button><div class="ph">+ ছবি</div><div class="nm" contenteditable="true">${a}${b?`<div>${b}</div>`:''}</div>`;
+  return d;
+}
+if(!saved){$('#p2 .grid').style.setProperty('--ph','250px');$('#p3 .grid').style.setProperty('--ph','190px');$$('.grid').forEach(g=>{const r=g.parentNode.querySelector('.cph');if(r)r.value=parseInt(g.style.getPropertyValue('--ph'))||250});chk()}
+$('#bdx').onclick=()=>T(t=>t.style.border='2px solid transparent');
+function applyTr(){const g=curG;if(!g)return toast('আগে একটি সেকশনে ক্লিক করুন');const q=c=>(g.parentNode.querySelector(c)||{}).value,bg=$('#tbg').checked,bd=$('#tbd').checked;g.style.setProperty('--cbg',bg?'transparent':q('.cbg')||'#ffffff');g.style.setProperty('--cbd',bd?'transparent':q('.cbd')||'#c9a227');g.style.setProperty('--csh',bg&&bd?'none':'0 3px 10px rgba(0,0,0,.1)')}
+$('#tbg').onchange=$('#tbd').onchange=applyTr;
+book.addEventListener('pointerdown',()=>{const g=curG;if(g){$('#tbg').checked=g.style.getPropertyValue('--cbg')=='transparent';$('#tbd').checked=g.style.getPropertyValue('--cbd')=='transparent'}});
+book.addEventListener('input',e=>{if(e.target.matches('.cbg'))$('#tbg').checked=false;if(e.target.matches('.cbd'))$('#tbd').checked=false});
+/* print */
+function pr(m){select(null);$('#ps').textContent=m=='b'?'@page{size:A3 landscape;margin:0}':'@page{size:A4;margin:0}';document.body.classList.remove('a','b');document.body.classList.add(m);setTimeout(()=>print(),60)}
+$('#pb').onclick=()=>pr('b');$('#pa').onclick=()=>pr('a');
+addEventListener('afterprint',()=>document.body.classList.remove('a','b'));
+</script>
+<script>
+(()=>{
+/* ===== Firebase ===== */
+const CFG={
+  apiKey:"AIzaSyC-rbtQAEFOu0QJ7A6pacvpqI9bkrk1j6Y",
+  authDomain:"cover-page-64b72.firebaseapp.com",
+  projectId:"cover-page-64b72",
+  storageBucket:"cover-page-64b72.firebasestorage.app",
+  messagingSenderId:"827780431838",
+  appId:"1:827780431838:web:7cac037443d839ebea274f",
+  measurementId:"G-4FT0XXT02M"
+};
+const COL='designs',U='https://www.gstatic.com/firebasejs/10.12.2/';
+const dn=$('#dname'),stat=$('#stat');
+let curId=null,dirty=false,fb=null,tA=0,tL=0,nw=0;
+try{curId=localStorage.getItem('bk26id');dn.value=localStorage.getItem('bk26n')||dn.value}catch(e){}
+const setS=t=>stat.textContent=t;
+const keep=()=>{try{curId?localStorage.setItem('bk26id',curId):localStorage.removeItem('bk26id');localStorage.setItem('bk26n',dn.value)}catch(e){}};
+dn.oninput=()=>{document.title=dn.value+' — বুকলেট স্টুডিও';keep()};
+
+async function initFB(){
+  try{
+    const [A,F,S,Au]=await Promise.all([import(U+'firebase-app.js'),import(U+'firebase-firestore.js'),import(U+'firebase-storage.js'),import(U+'firebase-auth.js')]);
+    const app=A.initializeApp(CFG);
+    try{await Au.signInAnonymously(Au.getAuth(app))}catch(e){console.warn('anonymous auth',e)}
+    fb={db:F.getFirestore(app),st:S.getStorage(app),F,S};
+    setS('☁ সংযুক্ত');
+  }catch(e){console.warn(e);setS('⌂ অফলাইন মোড')}
+}
+
+const snap=()=>{const c=book.cloneNode(true);c.querySelectorAll('.sel').forEach(e=>e.classList.remove('sel'));return c};
+const DU=/url\(["']?(data:[^"')]+)["']?\)/;
+
+async function pushImgs(c,id){
+  const cache=new Map();
+  c.querySelectorAll('img[src^="data:"]').forEach(i=>cache.set(i.getAttribute('src'),null));
+  c.querySelectorAll('[style*="data:"]').forEach(e=>{const m=DU.exec(e.getAttribute('style'));if(m)cache.set(m[1],null)});
+  const urls=[...cache.keys()];let n=0;
+  for(const u of urls){
+    setS(`ছবি আপলোড ${++n}/${urls.length}`);
+    const ext=(/data:image\/(\w+)/.exec(u)||[])[1]||'jpg';
+    const r=fb.S.ref(fb.st,`designs/${id}/${Date.now().toString(36)}_${n}.${ext}`);
+    await fb.S.uploadString(r,u,'data_url');
+    cache.set(u,await fb.S.getDownloadURL(r));
+  }
+  const rep=root=>{
+    root.querySelectorAll('img[src^="data:"]').forEach(i=>i.setAttribute('src',cache.get(i.getAttribute('src'))));
+    root.querySelectorAll('[style*="data:"]').forEach(e=>e.setAttribute('style',e.getAttribute('style').replace(/data:[^"')]+/,m=>cache.get(m)||m)));
+  };
+  rep(c);rep(book);
+}
+
+function clean(msg){setTimeout(()=>{dirty=false;clearTimeout(tA);clearTimeout(tL);setS(msg)},60)}
+
+async function save(asNew){
+  if(!fb)return toast('ক্লাউড সংযুক্ত নয় — ফাইল সেভ ব্যবহার করুন');
+  try{
+    const id=(!asNew&&curId)||'d'+Date.now().toString(36);
+    const name=asNew?dn.value+' (কপি)':dn.value;
+    setS('সেভ হচ্ছে…');
+    const c=snap();await pushImgs(c,id);
+    const html=c.innerHTML;
+    if(html.length>950000)throw new Error('ডিজাইন অনেক বড় (১MB সীমা), ছবি কমান');
+    await fb.F.setDoc(fb.F.doc(fb.db,COL,id),{name,html,theme:R.getAttribute('style')||'',updated:fb.F.serverTimestamp()});
+    curId=id;dn.value=name;keep();clean('☁ সংরক্ষিত ✓');
+    toast(asNew?'কপি সেভ হয়েছে ✓':'ক্লাউডে সেভ হয়েছে ✓');
+    if($('#tp_pj').classList.contains('on'))listPj();
+  }catch(e){console.warn(e);setS('⚠ সেভ হয়নি');toast('সেভ হয়নি: '+(e.code||e.message))}
+}
+
+function after(){
+  select(null);cur=$('#p1');curG=null;
+  $$('.grid').forEach(g=>{const b=g.parentNode.querySelector('.cols'),r=g.parentNode.querySelector('.cph');if(b)b.value=g.style.getPropertyValue('--cols')||3;if(r)r.value=parseInt(g.style.getPropertyValue('--ph'))||250});
+  chk();obs();
+}
+function load(d,id){
+  book.innerHTML=d.html;R.setAttribute('style',d.theme||'');
+  dn.value=d.name||'নামহীন ডিজাইন';curId=id||null;keep();after();
+  clean(fb?(id?'☁ খোলা হয়েছে':'⌂ ফাইল থেকে খোলা'):'⌂ ফাইল থেকে খোলা');
+}
+
+/* ===== Sidebar tabs ===== */
+const sb=$('#sb'),old=[...sb.children];
+const TABS=[['design','🎨','ডিজাইন'],['el','✨','এলিমেন্ট'],['text','🔤','টেক্সট'],['bg','🖼','ব্যাকগ্রাউন্ড'],['up','⬆','আপলোড'],['pj','☁','প্রজেক্ট']];
+sb.innerHTML='<nav id="rail"></nav><div id="pn"></div>';
+const rail=$('#rail'),pn=$('#pn'),P=k=>$('#tp_'+k);
+TABS.forEach(([k,i,t])=>{
+  const b=document.createElement('button');b.dataset.t=k;b.innerHTML=`<i>${i}</i>${t}`;rail.append(b);
+  const p=document.createElement('div');p.className='tp';p.id='tp_'+k;pn.append(p);
+});
+P('design').append(old[0],old[1]);
+P('el').append(old[4],old[5]);
+const h=document.createElement('h4');h.textContent='জলছাপ ছবি (বর্তমান পেজে)';
+P('bg').append(old[2],old[3],h,$('#wmb'),$('#wsz'),$('#wo'),$('#wmx'));
+const mk=(k,t,f)=>{const b=document.createElement('button');b.className='pv';b.textContent=t;b.onclick=f;P(k).append(b);return b};
+[['শিরোনাম',{s:46,b:1,w:520,a:'center'}],['উপশিরোনাম',{s:26,b:1,w:420,a:'center'}],['সাধারণ লেখা — এখানে লিখুন',{s:18,w:380}],['হাইলাইট বক্স',{s:20,b:1,w:340,a:'center',bg:'var(--c1)',c:'#fff',r:14}],['কার্ড বক্স',{s:18,w:360,a:'center',bg:'#fff',bd:'var(--c2)',r:16,sh:1}]].forEach(([t,o])=>{
+  const b=mk('text',t,()=>select(addTB(cur,{x:120,y:300,c:'#222',...o,h:t})));
+  b.style.fontWeight=o.b?700:400;b.style.fontSize=Math.min(o.s,22)+'px';
+});
+P('up').insertAdjacentHTML('beforeend','<h4>আপলোড</h4>');
+mk('up','🖼 লোগো / ছবি যোগ করুন',()=>$('#addim').click());
+mk('up','📷 বর্তমান সেকশনের কার্ডে সব ছবি',()=>{if(!curG)return toast('আগে পেজের একটি সেকশনে ক্লিক করুন');bgrid=curG;fm.value='';fm.click()});
+const show=k=>{
+  $$('#rail button').forEach(b=>b.classList.toggle('on',b.dataset.t==k));
+  $$('.tp').forEach(p=>p.classList.toggle('on',p.id=='tp_'+k));
+  if(k=='pj')listPj();
+};
+rail.onclick=e=>{const b=e.target.closest('button');if(b)show(b.dataset.t)};
+$('#menu').onclick=()=>document.body.classList.toggle('sbo');
+show('design');
+
+/* ===== Projects (cloud) ===== */
+async function listPj(){
+  const box=P('pj');box.innerHTML='<h4>☁ আমার ডিজাইন</h4>';
+  if(!fb){box.insertAdjacentHTML('beforeend','<p style="opacity:.7;font-size:13px">ক্লাউড সংযুক্ত নেই। ফাইলটি নিজের হোস্টিং বা লোকাল সার্ভারে খুলুন এবং Firebase Firestore/Storage চালু রাখুন।</p>');return}
+  try{
+    const s=await fb.F.getDocs(fb.F.query(fb.F.collection(fb.db,COL),fb.F.orderBy('updated','desc')));
+    if(s.empty)box.insertAdjacentHTML('beforeend','<p style="opacity:.7;font-size:13px">এখনও কোনো ডিজাইন সেভ হয়নি।</p>');
+    s.forEach(x=>{
+      const d=x.data(),el=document.createElement('div');el.className='pj';el.dataset.id=x.id;
+      const t=d.updated&&d.updated.toDate?d.updated.toDate().toLocaleString('bn-BD'):'';
+      el.innerHTML=`<div><b></b><small>${t}</small></div><button data-a="o">খুলুন</button><button data-a="c">কপি</button><button data-a="d">🗑</button>`;
+      el.querySelector('b').textContent=d.name||'নামহীন';
+      if(x.id==curId)el.style.borderColor='var(--ui)';
+      box.append(el);
+    });
+  }catch(e){console.warn(e);box.insertAdjacentHTML('beforeend','<p style="color:#b3261e;font-size:13px">লিস্ট আনা যায়নি: '+(e.code||e.message)+'</p>')}
+}
+P('pj').onclick=async e=>{
+  const b=e.target.closest('button[data-a]');if(!b||!fb)return;
+  const id=b.closest('.pj').dataset.id,a=b.dataset.a,ref=fb.F.doc(fb.db,COL,id);
+  try{
+    if(a=='o'){const s=await fb.F.getDoc(ref);if(s.exists()){load(s.data(),id);toast('ডিজাইন খোলা হয়েছে ✓');listPj()}}
+    if(a=='c'){const s=await fb.F.getDoc(ref);if(s.exists()){const d=s.data(),nid='d'+Date.now().toString(36);await fb.F.setDoc(fb.F.doc(fb.db,COL,nid),{...d,name:(d.name||'নামহীন')+' (কপি)',updated:fb.F.serverTimestamp()});toast('কপি তৈরি হয়েছে ✓');listPj()}}
+    if(a=='d'){
+      if(b.dataset.s!='1'){b.dataset.s='1';b.textContent='নিশ্চিত?';setTimeout(()=>{b.dataset.s='';b.textContent='🗑'},3000);return}
+      await fb.F.deleteDoc(ref);if(id==curId){curId=null;keep()}toast('মুছে ফেলা হয়েছে');listPj();
+    }
+  }catch(err){console.warn(err);toast('ব্যর্থ: '+(err.code||err.message))}
+};
+
+/* ===== Top bar actions ===== */
+$('#tsave').onclick=()=>save(false);
+$('#tcopy').onclick=()=>save(true);
+$('#e3').onclick=()=>pr('b');$('#e4').onclick=()=>pr('a');
+$('#tnew').onclick=()=>{
+  if(!nw){nw=1;setTimeout(()=>nw=0,4000);return toast('সেভ না করা কাজ মুছে যাবে — নিশ্চিত হলে আবার চাপুন')}
+  nw=0;build();R.setAttribute('style','');
+  $('#p2 .grid').style.setProperty('--ph','250px');$('#p3 .grid').style.setProperty('--ph','190px');
+  curId=null;dn.value='নামহীন ডিজাইন';keep();after();clean('নতুন ডিজাইন');
+};
+$('#ej').onclick=()=>{
+  const blob=new Blob([JSON.stringify({v:1,name:dn.value,html:snap().innerHTML,theme:R.getAttribute('style')||''})],{type:'application/json'});
+  const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download=(dn.value||'design')+'.json';a.click();
+};
+$('#ij').onclick=()=>{$('#ijf').value='';$('#ijf').click()};
+$('#ijf').onchange=async e=>{
+  const f=e.target.files[0];if(!f)return;
+  try{const d=JSON.parse(await f.text());if(!d.html)throw 0;load(d,null);toast('ফাইল থেকে খোলা হয়েছে ✓')}catch(x){toast('ফাইলটি সঠিক ডিজাইন ফাইল নয়')}
+};
+$('.dd').addEventListener('click',e=>{if(e.target.closest('button'))$('.dd').open=false});
+
+/* ===== Page bar & zoom ===== */
+$('#zm').closest('label').style.display='none';
+$('#z2').value=Math.round((+book.style.zoom||.7)*100);
+$('#z2').oninput=e=>book.style.zoom=e.target.value/100;
+$('#fitb').onclick=()=>{
+  const w=innerWidth-(document.body.classList.contains('sbo')&&innerWidth>760?330:30);
+  const z=Math.max(.3,Math.min(1.2,w/794));book.style.zoom=z;$('#z2').value=Math.round(z*100);
+};
+$$('#bb [data-p]').forEach(b=>b.onclick=()=>{const p=$('#'+b.dataset.p);cur=p;p.scrollIntoView({behavior:'smooth',block:'center'})});
+let io=null;
+function obs(){
+  if(io)io.disconnect();
+  io=new IntersectionObserver(es=>es.forEach(en=>{if(en.isIntersecting)$$('#bb [data-p]').forEach(b=>b.classList.toggle('on',b.dataset.p==en.target.id))}),{threshold:.5});
+  $$('.page').forEach(p=>io.observe(p));
+}
+obs();
+
+/* ===== Dirty tracking, autosave ===== */
+const localSave=()=>{try{localStorage.setItem('bk26',snap().innerHTML);localStorage.setItem('bk26t',R.getAttribute('style')||'')}catch(e){}};
+new MutationObserver(()=>{
+  dirty=true;setS(fb?'● পরিবর্তন আছে':'⌂ পরিবর্তন আছে');
+  clearTimeout(tL);tL=setTimeout(localSave,1500);
+  clearTimeout(tA);if(fb&&curId)tA=setTimeout(()=>save(false),8000);
+}).observe(book,{subtree:true,childList:true,characterData:true,attributes:true,attributeFilter:['style','src']});
+
+/* ===== Shortcuts ===== */
+addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key=='s'){e.preventDefault();save(false)}
+  const ed=document.activeElement&&(document.activeElement.isContentEditable||/INPUT|SELECT|TEXTAREA/.test(document.activeElement.tagName));
+  if(!ed&&(e.key=='Delete'||e.key=='Backspace')){$('#del').click()}
+  if(!ed&&(e.ctrlKey||e.metaKey)&&e.key=='d'){e.preventDefault();$('#dup').click()}
+});
+
+document.title=dn.value+' — বুকলেট স্টুডিও';
+initFB();
+})();
+</script>
+<script>
+(()=>{
+const T=$('.tool'),lab=s=>$(s).closest('label');
+$$('.tool .sep').forEach(e=>e.remove());
+document.body.append($('#toast'));
+const hid=document.createElement('div');hid.hidden=true;document.body.append(hid);hid.append($('#addtb'),$('#addim'));
+const G={};
+const grp=(k,cap,els)=>{
+  const d=document.createElement('div');d.className='tg hid';
+  if(cap)d.insertAdjacentHTML('afterbegin',`<span class="cap">${cap}</span>`);
+  els.forEach(e=>d.append(e));T.append(d);G[k]=d;
+};
+const chip=document.createElement('div');chip.className='tg';chip.innerHTML='<span class="chip"></span>';T.prepend(chip);
+const al=$$('.tool button[data-a="left"],.tool button[data-a="center"],.tool button[data-a="right"]');
+grp('font','ফন্ট',[$('#fe'),$('#fb'),$('#fs')]);
+grp('text','লেখা',[$('#fc'),$('#bd'),$('#it'),...al]);
+grp('box','বক্স',[$('#bg'),$('#bgx'),$('#bc'),$('#bdx'),$('#rd'),$('#sh')]);
+grp('card','ক্রম',[$('#up'),$('#dn'),$('#tp'),$('#ed'),lab('#mf'),lab('#mt'),$('#mv')]);
+grp('photo','ছবি জুম',[lab('#pz')]);
+grp('sec','সেকশন',[lab('#tbg'),lab('#tbd'),lab('#allc')]);
+grp('act','',[$('#dup'),$('#del')]);
+$('#tp_up').append(lab('#fn'));
+function ctx(el){
+  if(!el){T.classList.remove('on');return}
+  const c=el.classList,card=c.contains('card'),im=c.contains('im'),sp=c.contains('sp'),tb=c.contains('tb');
+  const on={font:!im,text:!im,box:true,card,photo:card,sec:card,act:tb||card};
+  Object.keys(G).forEach(k=>G[k].classList.toggle('hid',!on[k]));
+  chip.firstChild.textContent=card?'ছাত্র কার্ড':im?'ছবি / লোগো':sp?'সেকশন':'টেক্সট বক্স';
+  T.classList.add('on');
+}
+const _s=select;
+select=function(el){_s(el);ctx(el)};
+addEventListener('keydown',e=>{if(e.key=='Escape'&&sel)select(null)});
+})();
+</script>
+<script>
+(()=>{
+/* ===== আরও ফন্ট ===== */
+const addF=(s,groups)=>groups.forEach(([l,arr])=>{
+  const g=document.createElement('optgroup');g.label=l;
+  arr.forEach(f=>{const o=document.createElement('option');o.textContent=f;o.style.fontFamily=`'${f}'`;g.append(o)});
+  s.append(g);
+});
+addF($('#fe'),[
+  ['সেরিফ / ডিসপ্লে',['Cinzel','Cormorant Garamond','DM Serif Display','Abril Fatface','Libre Baskerville','Marcellus','Alfa Slab One']],
+  ['সানস / বোল্ড',['Bebas Neue','Oswald','Archivo Black','Raleway','Josefin Sans','Righteous']],
+  ['রাউন্ড / সফট',['Quicksand','Nunito','Comfortaa']],
+  ['হাতের লেখা / স্ক্রিপ্ট',['Dancing Script','Great Vibes','Pacifico','Satisfy','Caveat','Lobster']]
+]);
+addF($('#fb'),[['আরও বাংলা ফন্ট',['Anek Bangla','Atma','Mina','Galada']]]);
+
+/* ===== ব্যাকগ্রাউন্ড ছবি ===== */
+const bgp=$('#tp_bg'),hs=bgp.querySelectorAll('h4');
+hs[hs.length-1].textContent='🖼 ব্যাকগ্রাউন্ড ছবি';
+const wmb=$('#wmb'),wsz=$('#wsz'),wo=$('#wo'),wmx=$('#wmx');
+wsz.innerHTML='<option value="cover">পুরো পেজ ভরাট (কিছুটা ক্রপ হতে পারে)</option><option value="100% 100%">পুরো পেজে টেনে ফিট</option><option value="contain">ছবি পুরোটা দেখান</option><option value="auto">আসল সাইজ</option><option value="85%">বড় (৮৫%)</option><option value="60%">মাঝারি (৬০%)</option><option value="35%">ছোট (৩৫%)</option><option value="tile">টাইল / রিপিট</option>';
+const wps=document.createElement('select');
+wps.innerHTML='<option value="center">মাঝখানে</option><option value="top">উপরে</option><option value="bottom">নিচে</option><option value="left">বামে</option><option value="right">ডানে</option>';
+wo.min=5;wo.max=100;wo.value=100;
+const ck=()=>{const i=document.createElement('input');i.type='checkbox';return i};
+const all=ck(),nob=ck();
+const pbg=document.createElement('input');pbg.type='color';pbg.value='#fbf8f1';
+const rst=document.createElement('button');rst.textContent='পেজের রং রিসেট';
+const row=(t,el)=>{
+  const l=document.createElement('label'),s=document.createElement('span');s.textContent=t;l.className='bgr';
+  if(el.type=='checkbox'){l.classList.add('ck');l.append(el,s)}else l.append(s,el);
+  return l;
+};
+wmb.textContent='🖼 ব্যাকগ্রাউন্ড ছবি আপলোড';wmx.textContent='🗑 ছবি মুছুন';
+bgp.append(wmb,row('ফিট',wsz),row('অবস্থান',wps),row('স্বচ্ছতা',wo),row('সব পেজে প্রয়োগ করুন',all),wmx,
+  row('পেজের রং',pbg),rst,row('কভারের ডিজাইন-ব্যান্ড ও ফ্রেম লুকান',nob));
+
+const pages=()=>all.checked?$$('.page'):[cur||$('#p1')];
+const getW=(pg,mk)=>{let w=pg.querySelector('.wm');if(!w&&mk){w=document.createElement('div');w.className='wm';pg.prepend(w)}return w};
+const fit=w=>{
+  const v=wsz.value;
+  w.style.backgroundSize=v=='tile'?'160px':v;
+  w.style.backgroundRepeat=v=='tile'?'repeat':'no-repeat';
+  w.style.backgroundPosition=wps.value;
+  w.style.opacity=wo.value/100;
+};
+wmb.onclick=()=>pick(u=>{
+  pages().forEach(pg=>{const w=getW(pg,1);w.style.backgroundImage=`url("${u}")`;fit(w)});
+  toast('ব্যাকগ্রাউন্ড ছবি যোগ হয়েছে ✓');
+},1600,'image/webp');
+wsz.onchange=wps.onchange=wo.oninput=()=>pages().forEach(pg=>{const w=getW(pg);if(w)fit(w)});
+wmx.onclick=()=>pages().forEach(pg=>{const w=getW(pg);if(w)w.remove()});
+pbg.oninput=()=>pages().forEach(pg=>pg.style.backgroundColor=pbg.value);
+rst.onclick=()=>pages().forEach(pg=>pg.style.backgroundColor='');
+nob.onchange=()=>$('#p1').classList.toggle('nob',nob.checked);
+$('#rail').addEventListener('click',()=>{nob.checked=$('#p1').classList.contains('nob')});
+})();
+</script>
+<script>
+(()=>{
+const fe=$('#fe'),fb=$('#fb');
+const st=document.createElement('style');
+st.textContent='.fadd{display:flex;gap:6px;margin:6px 0}.fadd input{flex:1;min-width:0;padding:7px 9px;border:1px solid var(--ln);border-radius:8px;background:transparent;color:inherit;font:inherit;font-size:12px}.fadd button{border:1px solid var(--ln);background:transparent;color:inherit;border-radius:8px;padding:0 12px;cursor:pointer}.fnote{font-size:11px;opacity:.65;margin:4px 0}';
+document.head.append(st);
+const opt=n=>{const o=document.createElement('option');o.textContent=n;o.style.fontFamily=`'${n}'`;return o};
+function mine(n){
+  [fe,fb].forEach(s=>{
+    let g=s.querySelector('optgroup[data-m]');
+    if(!g){g=document.createElement('optgroup');g.label='আমার ফন্ট';g.dataset.m=1;s.prepend(g)}
+    if(![...g.children].some(o=>o.textContent==n))g.append(opt(n));
+  });
+}
+/* কম্পিউটারে ইনস্টল থাকলে দেখাবে */
+const sg=document.createElement('optgroup');
+sg.label='সিস্টেম বাংলা ফন্ট (কম্পিউটারে ইনস্টল থাকলে)';
+['Kalpurush','SolaimanLipi','Siyam Rupali','Nikosh','Vrinda','Shonar Bangla','Nirmala UI','Lohit Bengali','Mukti','Akaash'].forEach(f=>sg.append(opt(f)));
+fb.append(sg);
+
+/* ফন্ট ফাইল সংরক্ষণ (IndexedDB) */
+const DB=()=>new Promise((res,rej)=>{const r=indexedDB.open('bkfonts',1);r.onupgradeneeded=()=>r.result.createObjectStore('f',{keyPath:'name'});r.onsuccess=()=>res(r.result);r.onerror=()=>rej(r.error)});
+const put=async o=>{const d=await DB();return new Promise((res,rej)=>{const t=d.transaction('f','readwrite');t.objectStore('f').put(o);t.oncomplete=res;t.onerror=()=>rej(t.error)})};
+const all=async()=>{const d=await DB();return new Promise((res,rej)=>{const q=d.transaction('f').objectStore('f').getAll();q.onsuccess=()=>res(q.result);q.onerror=()=>rej(q.error)})};
+async function reg(n,buf){const f=new FontFace(n,buf);await f.load();document.fonts.add(f);mine(n)}
+const names=()=>{try{return JSON.parse(localStorage.getItem('bkfn')||'[]')}catch(e){return[]}};
+const addName=n=>{try{const a=names();if(!a.includes(n)){a.push(n);localStorage.setItem('bkfn',JSON.stringify(a))}}catch(e){}};
+
+/* প্যানেল */
+$('#tp_text').insertAdjacentHTML('beforeend','<h4>🔤 নিজের ফন্ট যোগ করুন</h4><button class="pv" id="fup">⬆ ফন্ট ফাইল আপলোড (.ttf .otf .woff2)</button><div class="fadd"><input id="fnm" placeholder="ইনস্টল করা ফন্টের নাম"><button id="fgo">যোগ</button></div><p class="fnote">আপলোড করা ফন্ট এই ব্রাউজারে সংরক্ষিত থাকে; অন্য কম্পিউটারে খুললে আবার আপলোড করতে হবে। শুধু সেই ফন্টই দিন যা ব্যবহারের অনুমতি আপনার আছে।</p><input type="file" id="ffi" accept=".ttf,.otf,.woff,.woff2" multiple hidden>');
+$('#fup').onclick=()=>$('#ffi').click();
+$('#ffi').onchange=async e=>{
+  for(const f of e.target.files){
+    const n=f.name.replace(/\.[^.]+$/,'').replace(/[_-]+/g,' ');
+    try{
+      const buf=await f.arrayBuffer();await reg(n,buf);
+      try{await put({name:n,buf})}catch(_){}
+      toast(n+' যোগ হয়েছে ✓');
+    }catch(x){toast(f.name+' লোড হয়নি')}
+  }
+  e.target.value='';
+};
+$('#fgo').onclick=()=>{
+  const n=$('#fnm').value.trim();if(!n)return;
+  mine(n);addName(n);$('#fnm').value='';toast(n+' যোগ হয়েছে (কম্পিউটারে ইনস্টল থাকলে দেখাবে)');
+};
+
+/* আগের যোগ করা ফন্ট ফিরিয়ে আনা */
+names().forEach(mine);
+all().then(a=>a.forEach(o=>reg(o.name,o.buf).catch(()=>{}))).catch(()=>{});
+})();
+</script>
+<script>
+(()=>{
+/* ===== ৩০টি স্টাইল: ডেটা ===== */
+const GR=c=>`linear-gradient(${c} 1px,transparent 1px),linear-gradient(90deg,${c} 1px,transparent 1px)`;
+const DOT=c=>`radial-gradient(${c} 1.5px,transparent 2px)`;
+const STR=(a,c)=>`repeating-linear-gradient(${a},transparent 0 14px,${c} 14px 16px)`;
+const E0='ellipse(78% 100% at 50% 0)',E1='ellipse(78% 100% at 50% 100%)',NB='inset(0 0 100% 0)',NF='inset(100% 0 0 0)',FULL='inset(0)';
+const NOFR=['0px','0 solid transparent','0px'];
+const PGEO=`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80'%3E%3Ccircle cx='20' cy='20' r='10' fill='%23f97316' fill-opacity='.18'/%3E%3Crect x='46' y='46' width='20' height='20' fill='%231d4ed8' fill-opacity='.12'/%3E%3Cpath d='M60 8l12 20H48z' fill='%2314b8a6' fill-opacity='.2'/%3E%3C/svg%3E")`;
+const PMEM=`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='90' height='90'%3E%3Cpath d='M8 20q6-10 12 0t12 0' stroke='%23ff4d8d' fill='none' stroke-width='3'/%3E%3Ccircle cx='62' cy='20' r='5' fill='%2300c2a8'/%3E%3Cpath d='M20 62l12 20H8z' fill='%23ffd23f' stroke='%23111' stroke-width='2'/%3E%3Crect x='60' y='58' width='16' height='16' fill='none' stroke='%237b2ff7' stroke-width='3'/%3E%3C/svg%3E")`;
+const PNOISE=`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2'/%3E%3CfeColorMatrix values='0 0 0 0 1 0 0 0 0 1 0 0 0 0 1 0 0 0 .13 0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")`;
+const TORN='polygon(0 0,100% 0,100% 86%,96% 92%,91% 86%,85% 93%,79% 87%,72% 94%,64% 86%,56% 93%,48% 87%,40% 94%,31% 86%,22% 93%,13% 87%,6% 93%,0 86%)';
+const TORNF='polygon(0 14%,6% 7%,13% 13%,22% 6%,31% 14%,40% 6%,48% 13%,56% 7%,64% 14%,72% 6%,79% 13%,85% 7%,91% 14%,96% 8%,100% 14%,100% 100%,0 100%)';
+const SL='polygon(0 0,100% 0,100% 84%,0 100%)',SLF='polygon(0 26%,100% 0,100% 100%,0 100%)';
+
+const S=[
+{k:'minimalist',en:'Minimalist',bn:'মিনিমালিস্ট',d:'অল্প উপাদান, প্রচুর ফাঁকা জায়গা|Few elements, lots of white space',u:'clf',c1:'#111111',c2:'#888888',bg:'#ffffff',bt:'#111111',tx:'#222222',hf:'Montserrat',hb:'Hind Siliguri',hw:300,ls:'.16em',tt:'uppercase',pat:'none',clip:NB,clipf:NF,fr:['26px','1px solid #111','0px'],band:'#ffffff',card:{bg:'#ffffff',bd:'#dddddd',bw:1,r:0,sh:'none'}},
+{k:'modern',en:'Modern',bn:'মডার্ন',d:'পরিচ্ছন্ন গ্র্যাডিয়েন্ট ও নরম ছায়া|Clean gradients and soft shadows',u:'clf',c1:'#4f46e5',c2:'#06b6d4',bg:'#f8fafc',bt:'#ffffff',tx:'#0f172a',hf:'Poppins',hb:'Hind Siliguri',hw:700,pat:DOT('rgba(79,70,229,.08)'),ps:'20px 20px',clip:SL,clipf:SLF,fr:NOFR,band:'linear-gradient(135deg,#4f46e5,#06b6d4)',card:{bg:'#ffffff',bd:'#e2e8f0',bw:1,r:18,sh:'0 10px 26px rgba(15,23,42,.1)'}},
+{k:'luxury',en:'Luxury',bn:'বিলাসবহুল',d:'কালো-সোনালি রং, সেরিফ লেখা, ডাবল ফ্রেম|Black and gold, serif type, double frame',u:'clf',c1:'#d4af37',c2:'#b8962e',bg:'#0f0f0f',bt:'#d4af37',tx:'#f3e9c6',hf:'Cinzel',hb:'Noto Serif Bengali',bf:'Cormorant Garamond',bb:'Noto Serif Bengali',hw:700,ls:'.12em',tt:'uppercase',pat:'radial-gradient(rgba(212,175,55,.1) 1px,transparent 1.5px)',ps:'18px 18px',clip:'inset(0 0 45px 0)',clipf:'inset(45px 0 0 0)',fr:['16px','3px double #d4af37','0px'],band:'linear-gradient(135deg,#000,#1d1d1d)',card:{bg:'#1a1a1a',bd:'#d4af37',bw:1,r:2,sh:'0 8px 24px rgba(0,0,0,.6)'},nm:'#d4af37',cx:'#f3e9c6'},
+{k:'bold',en:'Bold',bn:'বোল্ড',d:'মোটা লেখা, হলুদ-কালো, শক্ত ছায়া|Heavy type, yellow and black, hard shadows',u:'cl',c1:'#111111',c2:'#e11d48',bg:'#ffffff',bt:'#111111',tx:'#111111',hf:'Archivo Black',hb:'Baloo Da 2',hw:900,tt:'uppercase',pat:'none',clip:'polygon(0 0,100% 0,100% 90%,0 100%)',clipf:'polygon(0 30%,100% 0,100% 100%,0 100%)',fr:['14px','6px solid #111','0px'],band:'#ffd400',card:{bg:'#ffffff',bd:'#111111',bw:4,r:0,sh:'6px 6px 0 #111'}},
+{k:'vintage',en:'Vintage',bn:'পুরোনো দিনের নকশা',d:'সেপিয়া কাগজ, সেরিফ ও দ্বৈত বর্ডার|Sepia paper, serif and double borders',u:'cl',c1:'#7a4a21',c2:'#b8860b',bg:'#f1e4c8',bt:'#f6e8c3',tx:'#4a3320',hf:'Playfair Display',hb:'Tiro Bangla',bf:'Libre Baskerville',bb:'Tiro Bangla',hw:700,ls:'.03em',pat:'radial-gradient(rgba(120,80,30,.13) 1px,transparent 1.5px)',ps:'12px 12px',clip:E0,clipf:E1,fr:['14px','4px double #7a4a21','0px'],band:'linear-gradient(#8b5a2b,#6e4220)',card:{bg:'#f8eed6',bd:'#7a4a21',bw:2,r:3,sh:'2px 3px 0 rgba(90,60,30,.4)'}},
+{k:'retro',en:'Retro',bn:'রেট্রো',d:'৭০-এর দশকের কমলা-টিল রং, গোল কোণ|70s orange and teal, rounded corners',u:'cl',c1:'#e4572e',c2:'#17bebb',bg:'#fff3d6',bt:'#fff8e6',tx:'#3d2b1f',hf:'Righteous',hb:'Baloo Da 2',hw:400,ls:'.02em',pat:STR('45deg','rgba(228,87,46,.08)'),clip:'ellipse(70% 100% at 50% 0)',clipf:'ellipse(70% 100% at 50% 100%)',fr:['14px','4px solid #e4572e','26px'],band:'linear-gradient(90deg,#e4572e,#f59e0b)',card:{bg:'#fffaf0',bd:'#17bebb',bw:3,r:22,sh:'4px 4px 0 #f59e0b'}},
+{k:'3d',en:'3D',bn:'থ্রিডি',d:'স্তরযুক্ত ছায়া ও উঁচু লেখা|Layered shadows and extruded type',u:'cl',c1:'#6d28d9',c2:'#f59e0b',bg:'#eef2ff',bt:'#ffffff',tx:'#1e1b4b',hf:'Alfa Slab One',hb:'Baloo Da 2',hw:400,ls:'.02em',pat:GR('rgba(109,40,217,.07)'),ps:'28px 28px',clip:SL,clipf:SLF,fr:NOFR,band:'linear-gradient(145deg,#8b5cf6,#4c1d95)',card:{bg:'#ffffff',bd:'#c4b5fd',bw:2,r:18,sh:'0 2px 0 #a78bfa,0 6px 0 #8b5cf6,0 16px 22px rgba(76,29,149,.35)'}},
+{k:'futuristic',en:'Futuristic',bn:'ফিউচারিস্টিক',d:'গাঢ় নীল, সায়ান আভা, গ্রিড ও কোণাকাটা|Dark navy, cyan glow, grid and cut corners',u:'cl',c1:'#22d3ee',c2:'#818cf8',bg:'#060b1a',bt:'#67e8f9',tx:'#cfeeff',hf:'Oswald',hb:'Anek Bangla',bf:'Josefin Sans',bb:'Anek Bangla',hw:700,ls:'.1em',tt:'uppercase',pat:GR('rgba(34,211,238,.09)'),ps:'30px 30px',clip:'polygon(0 0,100% 0,100% 72%,90% 100%,0 100%)',clipf:'polygon(0 38%,10% 0,100% 0,100% 100%,0 100%)',fr:['14px','1px solid #22d3ee','0px'],band:'linear-gradient(135deg,#0a1128,#13255a)',card:{bg:'rgba(34,211,238,.06)',bd:'#22d3ee',bw:1,r:0,sh:'0 0 14px rgba(34,211,238,.4)'},nm:'#67e8f9',cx:'#cfeeff'},
+{k:'corporate',en:'Corporate',bn:'কর্পোরেট',d:'নেভি ব্লু, পরিপাটি সারি, পেশাদার ভাব|Navy blue, tidy rows, professional look',u:'clf',c1:'#0b3b75',c2:'#d98e00',bg:'#ffffff',bt:'#ffffff',tx:'#1f2937',hf:'Raleway',hb:'Hind Siliguri',hw:700,pat:'none',clip:'inset(0 0 28px 0)',clipf:'inset(28px 0 0 0)',fr:NOFR,band:'linear-gradient(90deg,#0b3b75,#1561b8)',card:{bg:'#ffffff',bd:'#cbd5e1',bw:1,r:6,sh:'0 2px 8px rgba(0,0,0,.08)'}},
+{k:'swiss',en:'Swiss Style',bn:'সুইস স্টাইল',d:'লাল-সাদা, বাম-সারিবদ্ধ বোল্ড লেখা, গ্রিড|Red and white, left-aligned bold type, grid',u:'clf',c1:'#e30613',c2:'#111111',bg:'#ffffff',bt:'#ffffff',tx:'#111111',hf:'Montserrat',hb:'Hind Siliguri',hw:800,ls:'-.02em',al:'left',pat:GR('rgba(0,0,0,.07)'),ps:'40px 40px',clip:FULL,clipf:'inset(60px 0 0 0)',fr:NOFR,band:'#e30613',card:{bg:'#ffffff',bd:'#111111',bw:1,r:0,sh:'none'}},
+{k:'geometric',en:'Geometric',bn:'জ্যামিতিক',d:'বৃত্ত, ত্রিভুজ ও চতুর্ভুজের নকশা|Circles, triangles and squares',u:'cl',c1:'#1d4ed8',c2:'#f97316',bg:'#fff7ed',bt:'#ffffff',tx:'#1e293b',hf:'Josefin Sans',hb:'Anek Bangla',hw:700,ls:'.04em',tt:'uppercase',pat:PGEO,ps:'80px 80px',clip:'polygon(0 0,100% 0,100% 86%,50% 100%,0 86%)',clipf:'polygon(0 14%,50% 0,100% 14%,100% 100%,0 100%)',fr:NOFR,band:'#1d4ed8',card:{bg:'#ffffff',bd:'#1d4ed8',bw:2,r:'0 22px 0 22px',sh:'5px 5px 0 #f97316'}},
+{k:'abstract',en:'Abstract',bn:'অ্যাবস্ট্রাক্ট',d:'রঙিন বৃত্তাকার ছোপ ও বাঁকা আকৃতি|Colourful blobs and organic shapes',u:'c',c1:'#7c3aed',c2:'#db2777',bg:'#fdf2f8',bt:'#ffffff',tx:'#3b0764',hf:'Righteous',hb:'Galada',hw:400,ls:'.02em',pat:'radial-gradient(circle at 12% 18%,rgba(251,113,133,.4) 0 90px,transparent 91px),radial-gradient(circle at 88% 72%,rgba(124,58,237,.28) 0 150px,transparent 151px),radial-gradient(circle at 62% 8%,rgba(250,204,21,.35) 0 70px,transparent 71px),radial-gradient(circle at 20% 92%,rgba(34,211,238,.3) 0 110px,transparent 111px)',clip:'ellipse(85% 100% at 30% 0)',clipf:'ellipse(85% 100% at 70% 100%)',fr:NOFR,band:'linear-gradient(135deg,#7c3aed,#db2777)',card:{bg:'rgba(255,255,255,.88)',bd:'#fb7185',bw:2,r:'32px 8px 32px 8px',sh:'0 10px 22px rgba(124,58,237,.2)'}},
+{k:'gradient',en:'Gradient',bn:'গ্র্যাডিয়েন্ট',d:'পুরো পেজে বেগুনি-গোলাপি-কমলা মিশ্রণ|Full-page violet, pink and orange blend',u:'cl',c1:'#ffffff',c2:'#ffe08a',bg:'#ec4899',bt:'#ffffff',tx:'#ffffff',hf:'Poppins',hb:'Anek Bangla',hw:800,ls:'-.01em',pat:'linear-gradient(160deg,#6366f1 0%,#ec4899 55%,#f59e0b 100%)',clip:NB,clipf:NF,fr:NOFR,band:'transparent',bb2:'rgba(0,0,0,.28)',card:{bg:'rgba(255,255,255,.2)',bd:'rgba(255,255,255,.6)',bw:1,r:20,sh:'0 10px 28px rgba(0,0,0,.18)',f:'blur(8px)'},nm:'#ffffff',cx:'#ffffff'},
+{k:'glass',en:'Glassmorphism',bn:'গ্লাসমরফিজম (কাচের মতো)',d:'ঝাপসা স্বচ্ছ কাচের প্যানেল|Frosted translucent glass panels',u:'cl',c1:'#7dd3fc',c2:'#ffffff',bg:'#1e3a8a',bt:'#ffffff',tx:'#ffffff',hf:'Poppins',hb:'Hind Siliguri',hw:600,pat:'radial-gradient(circle at 18% 22%,#22d3ee 0 170px,transparent 171px),radial-gradient(circle at 85% 68%,#a78bfa 0 230px,transparent 231px),radial-gradient(circle at 40% 95%,#f472b6 0 150px,transparent 151px),linear-gradient(135deg,#1e3a8a,#312e81)',clip:'inset(22px 22px 0 22px round 26px)',clipf:'inset(0 22px 22px 22px round 26px)',fr:NOFR,band:'rgba(255,255,255,.16)',bbf:'blur(14px)',card:{bg:'rgba(255,255,255,.16)',bd:'rgba(255,255,255,.5)',bw:1,r:22,sh:'0 10px 34px rgba(0,0,0,.25)',f:'blur(14px)'},nm:'#ffffff',cx:'#ffffff'},
+{k:'neumorphism',en:'Neumorphism',bn:'নিউমরফিজম',d:'নরম উঁচু-নিচু ছায়া, একই রঙের পৃষ্ঠ|Soft raised and pressed surfaces',u:'lc',c1:'#5b6b8c',c2:'#7f93bd',bg:'#e0e5ec',bt:'#44506b',tx:'#44506b',hf:'Nunito',hb:'Hind Siliguri',hw:800,pat:'none',clip:FULL,clipf:FULL,fr:NOFR,band:'#e0e5ec',card:{bg:'#e0e5ec',bd:'transparent',bw:0,r:22,sh:'9px 9px 16px #a3b1c6,-9px -9px 16px #ffffff'}},
+{k:'brutalist',en:'Brutalist',bn:'ব্রুটালিস্ট',d:'কাঁচা, মোটা কালো বর্ডার ও কড়া ছায়া|Raw, thick black borders, hard shadows',u:'cl',c1:'#000000',c2:'#ff3b30',bg:'#e9e9e9',bt:'#000000',tx:'#000000',hf:'Archivo Black',hb:'Baloo Da 2',hw:900,ls:'-.01em',tt:'uppercase',pat:'none',clip:'inset(0 0 40px 0)',clipf:'inset(40px 0 0 0)',fr:['0px','10px solid #000','0px'],band:'#ffe600',card:{bg:'#ffffff',bd:'#000000',bw:5,r:0,sh:'8px 8px 0 #000'}},
+{k:'editorial',en:'Editorial',bn:'এডিটোরিয়াল',d:'ম্যাগাজিনের মতো সেরিফ শিরোনাম ও সরু রেখা|Magazine-style serif headlines and thin rules',u:'clf',c1:'#111111',c2:'#c1121f',bg:'#faf7f2',bt:'#111111',tx:'#1a1a1a',hf:'Playfair Display',hb:'Noto Serif Bengali',bf:'Libre Baskerville',bb:'Noto Serif Bengali',hw:800,ls:'-.01em',al:'left',pat:'none',clip:NB,clipf:NF,fr:['24px','1px solid #111','0px'],band:'#faf7f2',card:{bg:'transparent',bd:'#111111',bw:1,r:0,sh:'none'}},
+{k:'typography',en:'Typography',bn:'টাইপোগ্রাফি',d:'বিশাল লেখাই ডিজাইন, পেছনে ভুতুড়ে অক্ষর|Type is the design, with giant ghost letters',u:'cf',c1:'#111827',c2:'#f43f5e',bg:'#ffffff',bt:'#111827',tx:'#111827',hf:'Bebas Neue',hb:'Anek Bangla',hw:800,ls:'.01em',tt:'uppercase',hs:1.3,al:'left',pat:'none',clip:NB,clipf:'inset(100% 0 0 0)',fr:NOFR,band:'#ffffff',card:{bg:'#ffffff',bd:'#111827',bw:2,r:0,sh:'none'}},
+{k:'handdrawn',en:'Hand Drawn',bn:'হাতে আঁকা',d:'খাতার লাইন, আঁকাবাঁকা বর্ডার, হাতের লেখা|Notebook lines, wobbly borders, handwriting',u:'lc',c1:'#1d6f8f',c2:'#ff7b54',bg:'#fffdf5',bt:'#17384a',tx:'#2b2b2b',hf:'Caveat',hb:'Atma',bf:'Caveat',bb:'Atma',hw:700,hs:1.2,pat:'repeating-linear-gradient(transparent 0 31px,rgba(70,130,180,.2) 31px 32px)',clip:'polygon(0 0,100% 0,100% 80%,92% 85%,80% 80%,66% 88%,52% 82%,38% 90%,24% 84%,10% 88%,0 82%)',clipf:'polygon(0 18%,10% 12%,24% 18%,38% 10%,52% 18%,66% 12%,80% 20%,92% 15%,100% 20%,100% 100%,0 100%)',fr:['16px','3px dashed #1d6f8f','255px 15px 225px 15px/15px 225px 15px 255px'],band:'#cdeffa',card:{bg:'#ffffff',bd:'#2b2b2b',bw:2,r:'255px 15px 225px 15px/15px 225px 15px 255px',sh:'3px 3px 0 #ffd166'}},
+{k:'watercolor',en:'Watercolor',bn:'জলরং',d:'নরম রঙের ছোপ ও ঝাপসা কিনারা|Soft colour washes and bleeding edges',u:'cl',c1:'#3d8f89',c2:'#e07a5f',bg:'#fffaf5',bt:'#2f4858',tx:'#33495a',hf:'Dancing Script',hb:'Mina',bf:'Cormorant Garamond',bb:'Mina',hw:700,hs:1.1,pat:'radial-gradient(ellipse at 20% 15%,rgba(255,182,193,.55),transparent 45%),radial-gradient(ellipse at 85% 30%,rgba(135,206,235,.5),transparent 45%),radial-gradient(ellipse at 40% 92%,rgba(176,224,160,.55),transparent 50%)',clip:FULL,clipf:FULL,fr:NOFR,band:'linear-gradient(135deg,rgba(135,206,235,.8),rgba(255,182,193,.8))',card:{bg:'rgba(255,255,255,.75)',bd:'rgba(61,143,137,.5)',bw:1,r:26,sh:'0 8px 24px rgba(61,143,137,.25)'}},
+{k:'papercut',en:'Paper Cut',bn:'কাগজ কাটা',d:'স্তরে স্তরে কাটা কাগজের ছায়া|Stacked cut-paper layers with depth',u:'cl',c1:'#2a9d8f',c2:'#e76f51',bg:'#f4f1de',bt:'#ffffff',tx:'#264653',hf:'Lobster',hb:'Galada',hw:400,pat:'none',clip:FULL,clipf:FULL,fr:NOFR,band:'#2a9d8f',card:{bg:'#ffffff',bd:'transparent',bw:0,r:14,sh:'0 6px 0 #e9c46a,0 12px 0 #e76f51'}},
+{k:'collage',en:'Collage',bn:'কোলাজ',d:'ছেঁড়া কিনারা, ঘোরানো কার্ড ও কাগজের টুকরো|Torn edges, tilted cards and paper scraps',u:'cl',c1:'#d62828',c2:'#003049',bg:'#f1e9d8',bt:'#003049',tx:'#003049',hf:'Abril Fatface',hb:'Galada',hw:400,pat:DOT('rgba(0,48,73,.12)'),ps:'14px 14px',clip:TORN,clipf:TORNF,fr:NOFR,band:'repeating-linear-gradient(45deg,#fcbf49 0 16px,#f77f00 16px 32px)',card:{bg:'#ffffff',bd:'#003049',bw:2,r:2,sh:'3px 5px 0 rgba(0,0,0,.28)'}},
+{k:'grunge',en:'Grunge',bn:'গ্রাঞ্জ',d:'ময়লা দানাদার টেক্সচার, ছেঁড়া কিনারা, লাল-কালো|Gritty texture, torn edges, red and black',u:'c',c1:'#d93a2b',c2:'#e6e6e6',bg:'#1b1b1b',bt:'#e6e6e6',tx:'#dddddd',hf:'Bebas Neue',hb:'Baloo Da 2',hw:900,ls:'.05em',tt:'uppercase',hs:1.15,pat:PNOISE,ps:'160px 160px',clip:TORN,clipf:TORNF,fr:['12px','3px solid #d93a2b','0px'],band:'#2a2a2a',card:{bg:'#262626',bd:'#d93a2b',bw:2,r:0,sh:'4px 4px 0 #000'},nm:'#e6e6e6',cx:'#dddddd'},
+{k:'duotone',en:'Duotone',bn:'ডুয়োটোন',d:'দুই রঙে ছবি রূপান্তর, বেগুনি ও গোলাপি|Images mapped to two colours, purple and pink',u:'cl',c1:'#3b0a8a',c2:'#ff3d81',bg:'#fff0f6',bt:'#ffffff',tx:'#3b0a8a',hf:'Poppins',hb:'Anek Bangla',hw:800,ls:'-.01em',pat:DOT('rgba(255,61,129,.15)'),ps:'16px 16px',clip:SL,clipf:SLF,fr:NOFR,band:'linear-gradient(135deg,#3b0a8a,#ff3d81)',card:{bg:'#ffffff',bd:'#3b0a8a',bw:2,r:12,sh:'4px 4px 0 #ff3d81'}},
+{k:'monochrome',en:'Monochrome',bn:'মনোক্রোম',d:'শুধু সাদা-কালো-ধূসর, ছবিও সাদাকালো|Only black, white and grey, images in greyscale',u:'clf',c1:'#111111',c2:'#777777',bg:'#f2f2f2',bt:'#ffffff',tx:'#111111',hf:'Montserrat',hb:'Hind Siliguri',hw:600,ls:'.03em',pat:'none',clip:SL,clipf:SLF,fr:['20px','1px solid #111','0px'],band:'#111111',card:{bg:'#ffffff',bd:'#111111',bw:1,r:0,sh:'3px 3px 0 #bdbdbd'}},
+{k:'cinematic',en:'Cinematic',bn:'সিনেমাটিক',d:'সিনেমার মতো কালো বার, ভিনিয়েট ও কমলা-টিল|Letterbox bars, vignette, orange and teal',u:'c',c1:'#e08a2e',c2:'#1f7a8c',bg:'#0b0b0e',bt:'#f2e3c0',tx:'#e8dcc0',hf:'Cinzel',hb:'Noto Serif Bengali',bf:'Cormorant Garamond',bb:'Noto Serif Bengali',hw:700,ls:'.22em',tt:'uppercase',pat:'radial-gradient(ellipse at center,transparent 40%,rgba(0,0,0,.7) 100%),linear-gradient(180deg,#10222b,#0b0b0e 55%,#2a1608)',clip:'inset(0 0 74% 0)',clipf:'inset(62% 0 0 0)',fr:NOFR,band:'#000000',card:{bg:'rgba(255,255,255,.05)',bd:'#e08a2e',bw:1,r:2,sh:'0 12px 30px rgba(0,0,0,.65)'},nm:'#f2e3c0',cx:'#e8dcc0'},
+{k:'neon',en:'Neon',bn:'নিয়ন',d:'অন্ধকারে জ্বলজ্বলে নিয়ন আলো ও গ্লো|Glowing neon light on dark',u:'cl',c1:'#00f5d4',c2:'#ff2e97',bg:'#0a0014',bt:'#00f5d4',tx:'#f0e6ff',hf:'Righteous',hb:'Baloo Da 2',hw:400,ls:'.03em',pat:GR('rgba(255,46,151,.12)'),ps:'36px 36px',clip:'polygon(0 0,100% 0,100% 82%,0 100%)',clipf:SLF,fr:['14px','2px solid #ff2e97','14px'],band:'linear-gradient(135deg,#12002b,#2a0054)',card:{bg:'rgba(255,46,151,.07)',bd:'#00f5d4',bw:2,r:14,sh:'0 0 12px #00f5d4,inset 0 0 12px rgba(0,245,212,.25)'},nm:'#00f5d4',cx:'#f0e6ff'},
+{k:'memphis',en:'Memphis',bn:'মেমফিস',d:'রঙিন ডুডল, আঁকাবাঁকা রেখা ও জিগজ্যাগ|Colourful doodles, squiggles and zigzags',u:'cl',c1:'#ff4d8d',c2:'#7b2ff7',bg:'#fff8e7',bt:'#111111',tx:'#111111',hf:'Righteous',hb:'Baloo Da 2',hw:400,ls:'.02em',pat:PMEM,ps:'90px 90px',clip:'polygon(0 0,100% 0,100% 86%,75% 100%,50% 86%,25% 100%,0 86%)',clipf:'polygon(0 14%,25% 0,50% 14%,75% 0,100% 14%,100% 100%,0 100%)',fr:['14px','4px solid #111','0px'],band:'#00c2a8',card:{bg:'#ffffff',bd:'#111111',bw:3,r:14,sh:'5px 5px 0 #ff4d8d'}},
+{k:'isometric',en:'Isometric',bn:'আইসোমেট্রিক',d:'৩০° কোণের গ্রিড ও গভীরতার ধাপ ছায়া|30° grid with stepped depth shadows',u:'cl',c1:'#2563eb',c2:'#d97706',bg:'#eff6ff',bt:'#ffffff',tx:'#1e3a8a',hf:'Montserrat',hb:'Anek Bangla',hw:800,pat:'linear-gradient(30deg,rgba(37,99,235,.13) 1px,transparent 1px),linear-gradient(150deg,rgba(37,99,235,.13) 1px,transparent 1px)',ps:'40px 70px',clip:'polygon(0 0,100% 0,100% 78%,50% 100%,0 78%)',clipf:'polygon(0 22%,50% 0,100% 22%,100% 100%,0 100%)',fr:NOFR,band:'linear-gradient(135deg,#2563eb,#1e40af)',card:{bg:'#ffffff',bd:'#2563eb',bw:2,r:6,sh:'8px 8px 0 #93c5fd,14px 14px 0 #dbeafe'}},
+{k:'flat',en:'Flat Design',bn:'ফ্ল্যাট ডিজাইন',d:'সমতল রং, ছায়াহীন, গোলাকার সরল আকৃতি|Solid colours, no shadows, simple rounded shapes',u:'clf',c1:'#27ae60',c2:'#2980b9',bg:'#ecf0f1',bt:'#ffffff',tx:'#2c3e50',hf:'Nunito',hb:'Hind Siliguri',hw:800,pat:'none',clip:'ellipse(90% 100% at 50% 0)',clipf:'ellipse(90% 100% at 50% 100%)',fr:NOFR,band:'#27ae60',card:{bg:'#ffffff',bd:'transparent',bw:0,r:14,sh:'none'}}
+];
+
+const rad=r=>typeof r=='number'?r+'px':r;
+const ink=c=>/^#[0-9a-f]{6}$/i.test(c)?((parseInt(c.slice(1,3),16)*299+parseInt(c.slice(3,5),16)*587+parseInt(c.slice(5,7),16)*114)/1000>150?'#111':'#fff'):'#111';
+const bdOf=s=>s.card.bd=='transparent'?s.c2:s.card.bd;
+let curS=null;
+
+/* ===== স্টাইল প্রয়োগ (পুরো বুকলেটে) ===== */
+function applyStyle(s,withText){
+  curS=s;const set=(k,v)=>R.style.setProperty(k,v);
+  set('--c1',s.c1);set('--c2',s.c2);set('--pbg',s.bg);set('--pat',s.pat||'none');set('--ps',s.ps||'auto');
+  set('--clip',s.clip);set('--clipf',s.clipf);
+  const f=s.fr||NOFR;set('--fi',f[0]);set('--fb',f[1]);set('--fr',f[2]);
+  set('--band',s.band);set('--bt',s.bt);set('--cx',s.cx||s.tx);set('--secbg',s.card.bg);set('--nmc',s.nm||s.c1);
+  set('--bbf',s.bbf||'none');set('--bb2',s.bb2||s.band);
+  $$('.page').forEach(p=>{
+    [...p.classList].filter(c=>c.startsWith('st-')).forEach(c=>p.classList.remove(c));
+    p.classList.add('sx','st-'+s.k);p.style.backgroundColor='';
+  });
+  $$('.grid').forEach(g=>{
+    const c=s.card,st=g.style;
+    st.setProperty('--cbg',c.bg);st.setProperty('--cbd',c.bd);st.setProperty('--crad',rad(c.r));
+    st.setProperty('--csh',c.sh);st.setProperty('--cbw',c.bw+'px');st.setProperty('--cbs',c.s||'solid');st.setProperty('--cbf',c.f||'none');
+  });
+  if(withText)styleText(s);
+  chk();
+}
+function styleText(s){
+  const cx=s.cx||s.tx;
+  $$('.tb:not(.im)').forEach(t=>{
+    const s0=t.dataset.s0||(t.dataset.s0=parseFloat(t.style.fontSize)||18);
+    const pg=t.closest('.page'),y=t.offsetTop,big=+s0>=30,bgv=t.style.background||'';
+    t.dataset.en=big?s.hf:(s.bf||'Poppins');t.dataset.bn=big?s.hb:(s.bb||'Hind Siliguri');ff(t);
+    t.style.fontSize=Math.round(s0*(big?(s.hs||1):1))+'px';
+    if(big){t.dataset.h=1;t.style.fontWeight=s.hw;t.style.letterSpacing=s.ls||'0';t.style.textTransform=s.tt||'none';if(s.al&&pg.id=='p1')t.style.textAlign=s.al}
+    else{delete t.dataset.h;t.style.letterSpacing='';t.style.textTransform=''}
+    if(/var\(--c1\)/.test(bgv)){t.style.color=ink(s.c1)}
+    else if(bgv&&bgv!='transparent'){
+      t.style.background=s.card.bg;t.style.border=(s.card.bw||2)+'px '+(s.card.s||'solid')+' '+bdOf(s);
+      t.style.borderRadius=rad(s.card.r);t.style.boxShadow=s.card.sh=='none'?'':s.card.sh;t.style.color=cx;
+      t.style.backdropFilter=s.card.f||'';
+    }else t.style.color=(pg.id=='p1'&&(y<340||y>=985))?s.bt:s.tx;
+  });
+}
+
+/* ===== কভার টেমপ্লেট (৩টি বিন্যাস, প্রতিটি স্টাইলের নিয়মে) ===== */
+function tpl(s,n){
+  applyStyle(s,false);
+  const p1=$('#p1');let logo=p1.querySelector('.tb.im');
+  p1.querySelectorAll('.tb:not(.im)').forEach(t=>t.remove());
+  p1.classList.remove('nob');
+  const cx=s.cx||s.tx,hfont=`font-family:'${s.hf}','${s.hb}',sans-serif`;
+  const B=(o,h)=>{
+    const t=addTB(p1,{c:s.tx,en:h?s.hf:(s.bf||'Poppins'),bn:h?s.hb:(s.bb||'Hind Siliguri'),...o});
+    t.dataset.s0=o.s;t.style.minHeight='0';
+    if(h){t.dataset.h=1;t.style.fontWeight=s.hw;t.style.letterSpacing=s.ls||'0';t.style.textTransform=s.tt||'none';t.style.fontSize=Math.round(o.s*(s.hs||1))+'px';t.style.lineHeight='1.08'}
+    return t;
+  };
+  const C=o=>{
+    const t=B({c:cx,...o});
+    t.style.background=s.card.bg;t.style.border=(s.card.bw||2)+'px '+(s.card.s||'solid')+' '+bdOf(s);
+    t.style.borderRadius=rad(s.card.r);t.style.boxShadow=s.card.sh=='none'?'':s.card.sh;
+    if(s.card.f)t.style.backdropFilter=s.card.f;return t;
+  };
+  const L=(x,y,w,h)=>{
+    if(!logo)logo=addTB(p1,{cls:'im',x,y,w,hh:h,s:15});
+    const q=logo.style;q.left=x+'px';q.top=y+'px';q.width=w+'px';q.height=h+'px';
+  };
+  const pill=(x,y,w,t,bg,c)=>{const e=B({x,y,w,s:20,b:1,a:'center',c,bg,r:40,h:t,en:'Montserrat'});e.style.borderRadius='40px';return e};
+  const feat='<b style="color:var(--c1)">আমাদের বৈশিষ্ট্য</b><br>✔ অভিজ্ঞ শিক্ষক &nbsp; ✔ আধুনিক ক্লাসরুম<br>✔ নিরাপদ পরিবেশ &nbsp; ✔ ছোট ব্যাচ';
+  const foot='<b>প্রতিষ্ঠানের পরিচিতি</b> — এখানে সংক্ষিপ্ত বিবরণ লিখুন<br>📍 ঠিকানা: গ্রাম, ইউনিয়ন, উপজেলা, জেলা<br>📞 01XXX-XXXXXX &nbsp; ✉ info@example.com';
+  const ttl='ভর্তি<br>চলছে';
+  if(n==1){
+    const a=s.al=='left'?'left':'center';
+    L(a=='left'?60:347,34,100,100);
+    B({x:97,y:150,w:600,s:40,a,c:s.bt,h:'আপনার প্রতিষ্ঠানের নাম'},1);
+    B({x:97,y:208,w:600,s:20,a,c:s.bt,h:'YOUR INSTITUTION NAME'});
+    B({x:197,y:254,w:400,s:16,a,c:s.bt,h:'জ্ঞান • নৈতিকতা • সাফল্য'});
+    C({x:112,y:390,w:570,s:18,a:'center',h:`<div style="${hfont};font-size:2.1em;font-weight:800;color:var(--c1)">ভর্তি চলছে</div><div style="font-size:1.3em;font-weight:700;color:var(--c2)">শিক্ষাবর্ষ ২০২৬–২০২৭</div><div style="margin-top:10px">প্লে থেকে ৫ম শ্রেণি পর্যন্ত</div>`});
+    pill(222,640,350,'Admissions Open 2026','var(--c1)',ink(s.c1));
+    C({x:112,y:730,w:570,s:16,a:'center',h:feat});
+    B({x:77,y:1004,w:640,s:15,a:'center',c:s.bt,h:foot});
+  }else if(n==2){
+    L(60,50,84,84);
+    B({x:160,y:62,w:560,s:30,a:'left',c:s.bt,h:'আপনার প্রতিষ্ঠানের নাম'},1);
+    B({x:160,y:108,w:560,s:15,a:'left',c:s.bt,h:'YOUR INSTITUTION NAME • EST. 2010'});
+    B({x:60,y:380,w:674,s:76,a:'left',h:ttl},1);
+    const r=B({x:60,y:620,w:120,hh:6,s:10,bg:s.c2,h:''});r.style.padding='0';
+    B({x:60,y:650,w:600,s:22,a:'left',h:'শিক্ষাবর্ষ ২০২৬–২০২৭ • প্লে থেকে ৫ম শ্রেণি'});
+    C({x:60,y:740,w:420,s:17,a:'left',h:feat});
+    pill(60,910,300,'Admissions Open 2026','var(--c1)',ink(s.c1));
+    B({x:60,y:1010,w:674,s:15,a:'left',c:s.bt,h:foot});
+  }else{
+    L(60,48,92,92);
+    B({x:170,y:64,w:560,s:28,a:'left',c:s.bt,h:'আপনার প্রতিষ্ঠানের নাম'},1);
+    B({x:170,y:104,w:560,s:15,a:'left',c:s.bt,h:'YOUR INSTITUTION NAME'});
+    B({x:50,y:420,w:700,s:104,a:'left',h:ttl},1);
+    pill(60,790,360,'শিক্ষাবর্ষ ২০২৬–২০২৭',s.c2,ink(s.c2));
+    C({x:60,y:860,w:674,s:17,a:'left',h:feat});
+    B({x:60,y:1010,w:674,s:15,a:'left',c:s.bt,h:foot});
+  }
+  chk();
+}
+
+/* ===== প্রিভিউ থাম্বনেইল ===== */
+function thumb(s){
+  const d=document.createElement('div');d.className='sth';
+  d.style.backgroundColor=s.bg;d.style.backgroundImage=s.pat||'none';
+  d.style.backgroundSize=(s.ps||'auto').replace(/(\d+)px/g,(m,v)=>Math.max(2,v/6)+'px');
+  d.innerHTML='<i class="tb1"></i><i class="tb2"></i><b class="tt">Aa আ</b><em class="tc"></em>';
+  const [h,f,t,c]=d.children;
+  h.style.background=s.band;h.style.clipPath=s.clip;
+  f.style.background=s.band;f.style.clipPath=s.clipf;
+  t.style.cssText=`color:${s.bt};font-family:'${s.hf}','${s.hb}';font-weight:${s.hw};text-transform:${s.tt||'none'}`;
+  c.style.background=s.card.bg;
+  c.style.border=(s.card.bw?Math.min(2,s.card.bw):0)+'px solid '+s.card.bd;
+  c.style.borderRadius=typeof s.card.r=='number'?Math.round(s.card.r/3)+'px':s.card.r.replace(/\d+px/g,m=>Math.round(parseInt(m)/4)+'px');
+  c.style.boxShadow=s.card.sh=='none'?'none':s.card.sh.replace(/-?\d+px/g,m=>Math.round(parseInt(m)/3)+'px');
+  return d;
+}
+
+/* ===== প্যানেল ===== */
+const rail=$('#rail'),pn=$('#pn');
+const btn=document.createElement('button');btn.dataset.t='style';btn.innerHTML='<i>🎭</i>স্টাইল';
+rail.insertBefore(btn,rail.children[1]);
+const tp=document.createElement('div');tp.className='tp';tp.id='tp_style';pn.append(tp);
+tp.innerHTML=`<h4>🎭 ৩০টি ডিজাইন স্টাইল — Design Styles</h4>
+<div class="sfl" id="sfl"><button data-f="" class="on">সব / All</button><button data-f="c">কভার</button><button data-f="l">তালিকা পেজ</button><button data-f="f">ফরম</button></div>
+<div class="scur" id="scur">একটি স্টাইল বেছে নিন — রং, ফন্ট, ব্যাকগ্রাউন্ড, বর্ডার, ছায়া ও কার্ড সব বদলে যাবে।</div>
+<div class="stp" id="stp"><div style="font-size:12px;font-weight:600">কভারে টেমপ্লেট বসান (সম্পাদনাযোগ্য):</div>
+<div class="tbs"><button data-n="1">১ সেন্টার</button><button data-n="2">২ বাম-সারি</button><button data-n="3">৩ পোস্টার</button></div>
+<label><input type="checkbox" id="stx" checked> বিদ্যমান লেখার ফন্ট ও রং-ও বদলান</label></div>
+<div class="sg" id="sg"></div>`;
+let flt='';
+function render(){
+  const g=$('#sg');g.innerHTML='';
+  S.filter(s=>!flt||s.u.includes(flt)).forEach(s=>{
+    const [bd,ed]=s.d.split('|'),c=document.createElement('div');c.className='scard'+(curS&&curS.k==s.k?' on':'');c.dataset.k=s.k;
+    c.append(thumb(s));
+    c.insertAdjacentHTML('beforeend',`<div class="sn"><b>${s.en}</b><span>${s.bn}</span></div><p>${bd}<br><i>${ed}</i></p><button>নির্বাচন করুন / Select</button>`);
+    g.append(c);
+  });
+}
+function pickStyle(s){
+  applyStyle(s,$('#stx').checked);
+  $('#scur').innerHTML=`<b>নির্বাচিত:</b> ${s.en} — ${s.bn}`;$('#stp').classList.add('on');
+  render();toast(s.bn+' স্টাইল প্রয়োগ হয়েছে ✓');
+}
+$('#sg').onclick=e=>{const c=e.target.closest('.scard');if(!c)return;if(e.target.closest('button')||e.target.closest('.sth'))pickStyle(S.find(s=>s.k==c.dataset.k))};
+$('#stp').onclick=e=>{const b=e.target.closest('button[data-n]');if(b&&curS){tpl(curS,+b.dataset.n);toast('কভার টেমপ্লেট বসেছে — লেখা ক্লিক করে বদলান ✓')}};
+$('#sfl').onclick=e=>{const b=e.target.closest('button');if(!b)return;flt=b.dataset.f;$$('#sfl button').forEach(x=>x.classList.toggle('on',x==b));render()};
+render();
+/* সেভ করা ডিজাইন খুললে চলতি স্টাইল চিনে নেওয়া */
+const detect=()=>{const p=$('#p1');const c=p&&[...p.classList].find(x=>x.startsWith('st-'));curS=c?S.find(s=>'st-'+s.k==c)||null:null;if(curS){$('#scur').innerHTML=`<b>চলতি স্টাইল:</b> ${curS.en} — ${curS.bn}`;$('#stp').classList.add('on')}render()};
+detect();$('#rail').addEventListener('click',e=>{if(e.target.closest('[data-t="style"]'))detect()});
+
+/* ===== PNG / JPG এক্সপোর্ট ===== */
+async function exp(type){
+  try{
+    if(!window.html2canvas)await new Promise((res,rej)=>{const s=document.createElement('script');s.src='https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js';s.onload=res;s.onerror=rej;document.head.append(s)});
+  }catch(e){return toast('PNG/JPG এক্সপোর্টের লাইব্রেরি লোড হয়নি (ইন্টারনেট দরকার)')}
+  select(null);const z=book.style.zoom;book.style.zoom=1;document.body.classList.add('cap');
+  try{
+    for(const p of $$('.page')){
+      toast(p.id+' তৈরি হচ্ছে…');
+      const c=await html2canvas(p,{scale:3,backgroundColor:null,useCORS:true,logging:false});
+      const a=document.createElement('a');a.download=`${$('#dname').value||'design'}-${p.id}.${type}`;
+      a.href=c.toDataURL(type=='png'?'image/png':'image/jpeg',.95);a.click();
+      await new Promise(r=>setTimeout(r,350));
+    }
+    toast('এক্সপোর্ট শেষ ✓');
+  }catch(e){console.warn(e);toast('এক্সপোর্ট ব্যর্থ — নিখুঁত ফল পেতে PDF প্রিন্ট ব্যবহার করুন')}
+  finally{book.style.zoom=z;document.body.classList.remove('cap')}
+}
+const ddm=$('.ddm');
+[['ep','🖼 সব পেজ PNG (হাই-রেজ)','png'],['ej2','🖼 সব পেজ JPG (হাই-রেজ)','jpeg']].forEach(([id,t,ty])=>{
+  const b=document.createElement('button');b.id=id;b.textContent=t;b.onclick=()=>exp(ty);ddm.insertBefore(b,$('#ej'));
+});
+})();
+</script>
+<script>
+(()=>{
+/* ================= প্রপার্টি প্যানেল (সবকিছু কাস্টমাইজ) ================= */
+const ins=document.createElement('aside');ins.id='ins';document.body.append(ins);
+const tbtn=document.createElement('button');tbtn.id='tins';tbtn.textContent='⚙ প্রপার্টি';$('#tsave').before(tbtn);
+tbtn.onclick=()=>{document.body.classList.toggle('ino');render()};
+if(innerWidth>1100)document.body.classList.add('ino');
+
+const H=c=>{const m=(c||'').match(/[\d.]+/g);return(!m||m.length<3)?{hex:'#ffffff',a:0}:{hex:'#'+m.slice(0,3).map(n=>(+n|0).toString(16).padStart(2,'0')).join(''),a:m.length>3?+m[3]:1}};
+const RGBA=(h,a)=>{const n=parseInt(h.slice(1),16);return`rgba(${n>>16&255},${n>>8&255},${n&255},${a})`};
+const cvar=k=>{const v=getComputedStyle(R).getPropertyValue(k).trim();return/^#[0-9a-f]{6}$/i.test(v)?v:'#0f5c4a'};
+const sec=t=>{const d=document.createElement('div');d.className='is';d.innerHTML=`<h5>${t}</h5>`;ins.append(d);return d};
+const row=(d,l,...els)=>{const r=document.createElement('div');r.className='ir';const s=document.createElement('label');s.textContent=l;r.append(s,...els);d.append(r);return r};
+const mkI=(type,v,fn,ev)=>{const i=document.createElement('input');i.type=type;if(type=='checkbox')i.checked=v;else i.value=v;i[ev||'oninput']=()=>fn(type=='checkbox'?i.checked:type=='color'?i.value:+i.value);return i};
+const num=(v,mn,mx,st,fn)=>{const i=mkI('number',v,fn);i.min=mn;i.max=mx;i.step=st||1;return i};
+const rng=(v,mn,mx,st,fn)=>{const i=mkI('range',v,fn);i.min=mn;i.max=mx;i.step=st||1;return i};
+const col=(v,fn)=>mkI('color',v,fn);
+const chb=(v,fn)=>mkI('checkbox',v,fn,'onchange');
+const sl=(opts,v,fn)=>{const s=document.createElement('select');s.innerHTML=opts.map(([a,b])=>`<option value="${a}">${b}</option>`).join('');s.value=v;s.onchange=()=>fn(s.value);return s};
+const bt=(t,fn)=>{const b=document.createElement('button');b.textContent=t;b.onclick=fn;return b};
+const tg=()=>targets();
+const maxZ=p=>Math.max(1,...[...p.children].map(e=>+getComputedStyle(e).zIndex||0));
+
+/* ---- লেখার অংশ নির্বাচন করে শুধু সেই অংশ বদলানো ---- */
+let lr=null;
+const chip=()=>{const c=$('.tool .chip');if(c)c.textContent=c.textContent.split(' • ')[0]+(lr?' • নির্বাচিত লেখা':'')};
+document.addEventListener('selectionchange',()=>{
+  const s=getSelection();if(!s.rangeCount)return;
+  const ae=document.activeElement;if(ae&&ae.closest&&ae.closest('.tool,#sb,#top,#ins'))return;
+  const r=s.getRangeAt(0),n=r.commonAncestorContainer,e=n.nodeType==1?n:n.parentElement;
+  const h=e&&e.closest&&e.closest('[contenteditable="true"]');
+  lr=(!r.collapsed&&h&&book.contains(h))?r.cloneRange():null;chip();
+});
+function part(css){
+  if(!lr)return false;
+  const sp=document.createElement('span');Object.assign(sp.style,css);
+  try{sp.appendChild(lr.extractContents());lr.insertNode(sp)}catch(e){return false}
+  const s=getSelection(),r=document.createRange();r.selectNodeContents(sp);s.removeAllRanges();s.addRange(r);lr=r.cloneRange();return true;
+}
+const pcs=()=>{const n=lr.commonAncestorContainer;return getComputedStyle(n.nodeType==1?n:n.parentElement)};
+$('.tool').addEventListener('mousedown',e=>{if(e.target.closest('button'))e.preventDefault()});
+$('#fc').oninput=e=>{if(!part({color:e.target.value}))T(t=>t.style.color=e.target.value)};
+$('#fs').oninput=e=>{if(!part({fontSize:e.target.value+'px'}))T(t=>t.style.fontSize=e.target.value+'px')};
+const fam=()=>`'${$('#fe').value}','${$('#fb').value}',sans-serif`;
+$('#fe').onchange=$('#fb').onchange=()=>{if(!part({fontFamily:fam()}))T(t=>{t.dataset.en=$('#fe').value;t.dataset.bn=$('#fb').value;ff(t)})};
+$('#bd').onclick=()=>{if(lr){part({fontWeight:+pcs().fontWeight>=600?'400':'700'})}else T(t=>t.style.fontWeight=t.style.fontWeight=='700'?'400':'700')};
+$('#it').onclick=()=>{if(lr){part({fontStyle:pcs().fontStyle=='italic'?'normal':'italic'})}else T(t=>t.style.fontStyle=t.style.fontStyle=='italic'?'normal':'italic')};
+[['ul','U','underline'],['st','S','line-through']].forEach(([id,t,v])=>{
+  const b=bt(t,()=>{if(lr)part({textDecoration:v});else T(x=>x.style.textDecoration=x.style.textDecoration==v?'none':v)});
+  b.id=id;b.style.cssText=t=='U'?'text-decoration:underline':'text-decoration:line-through';$('#it').after(b);
+});
+$('#sh').textContent='বক্স ছায়া';
+
+/* ---- ছবির ইফেক্ট (ছায়া আকৃতি অনুসরণ করে) ---- */
+const fxOf=i=>JSON.parse(i.dataset.fx||'{"br":100,"ct":100,"gs":0,"bl":0}');
+function setFx(i,p,el){
+  const f={...fxOf(i),...p};i.dataset.fx=JSON.stringify(f);
+  i.style.filter=`brightness(${f.br}%) contrast(${f.ct}%) grayscale(${f.gs}%) blur(${f.bl}px)`+(f.sh?` drop-shadow(${f.sh.x}px ${f.sh.y}px ${f.sh.b}px ${RGBA(f.sh.c,f.sh.a)})`:'');
+  el.style.overflow=f.sh?'visible':'';
+}
+function shadowUI(d,title,on0,init,apply,spread){
+  const st={x:init.x,y:init.y,b:init.b,s:0,c:'#000000',a:init.a};
+  const go=()=>apply(on.checked?st:null);
+  const on=chb(on0,go);row(d,title,on);
+  row(d,'X / Y',num(st.x,-300,300,1,v=>{st.x=v;go()}),num(st.y,-300,300,1,v=>{st.y=v;go()}));
+  row(d,'ঝাপসা',rng(st.b,0,100,1,v=>{st.b=v;go()}));
+  if(spread)row(d,'ছড়ানো',rng(0,-30,80,1,v=>{st.s=v;go()}));
+  row(d,'রং / ঘনত্ব',col(st.c,v=>{st.c=v;go()}),rng(st.a*100,0,100,1,v=>{st.a=v/100;go()}));
+}
+
+/* ---- বক্স/লেখা/ছবি নির্বাচিত হলে ---- */
+function bring(el){const p=el.closest('.page');el.style.left=Math.max(0,Math.min(el.offsetLeft,p.clientWidth-el.offsetWidth))+'px';el.style.top=Math.max(0,Math.min(el.offsetTop,p.clientHeight-el.offsetHeight))+'px'}
+function elProps(el){
+  const c=el.classList,isTb=c.contains('tb'),isIm=c.contains('im'),isCard=c.contains('card');
+  const cs=getComputedStyle(el);let d;
+  if(isTb){
+    d=sec('📐 অবস্থান ও আকার');
+    row(d,'X / Y',num(el.offsetLeft,-9999,9999,1,v=>el.style.left=v+'px'),num(el.offsetTop,-9999,9999,1,v=>el.style.top=v+'px'));
+    row(d,'চওড়া/উচ্চতা',num(el.offsetWidth,10,4000,1,v=>el.style.width=v+'px'),num(el.offsetHeight,6,4000,1,v=>el.style.height=v+'px'));
+    row(d,'ঘূর্ণন °',rng(+el.dataset.rot||0,-180,180,1,v=>{el.dataset.rot=v;el.style.transform=v?`rotate(${v}deg)`:''}));
+    row(d,'অস্বচ্ছতা',rng(Math.round((parseFloat(el.style.opacity)||1)*100),5,100,1,v=>el.style.opacity=v/100));
+    row(d,'',bt('📥 পেজের ভিতরে আনুন',()=>{bring(el);render()}),bt('⬆ সামনে',()=>el.style.zIndex=maxZ(el.parentNode)+1),bt('⬇ পেছনে',()=>el.style.zIndex=0));
+  }
+  if(!isIm){
+    d=sec('🔤 লেখা — পুরো বক্স');
+    row(d,'সাইজ',num(Math.round(parseFloat(cs.fontSize)),4,500,1,v=>tg().forEach(t=>t.style.fontSize=v+'px')));
+    row(d,'রং',col(H(cs.color).hex,v=>tg().forEach(t=>t.style.color=v)));
+    row(d,'লাইন-হাইট',num(parseFloat(el.style.lineHeight)||1.4,.8,4,.1,v=>tg().forEach(t=>t.style.lineHeight=v)));
+    row(d,'অক্ষর-ফাঁক',num(parseFloat(el.style.letterSpacing)||0,-5,40,.5,v=>tg().forEach(t=>t.style.letterSpacing=v+'px')));
+    row(d,'অক্ষরের ধরন',sl([['none','স্বাভাবিক'],['uppercase','বড় হাতের'],['lowercase','ছোট হাতের'],['capitalize','প্রথম বড়']],el.style.textTransform||'none',v=>tg().forEach(t=>t.style.textTransform=v)));
+    row(d,'অ্যালাইন',...[['left','⇤'],['center','↔'],['right','⇥'],['justify','☰']].map(([v,t])=>bt(t,()=>tg().forEach(x=>x.style.textAlign=v))));
+    const n=document.createElement('div');n.style.cssText='opacity:.65;font-size:11px;line-height:1.4';n.textContent='টিপ: লেখার শুধু একটি অংশ মাউসে সিলেক্ট করে উপরের বারে রং/সাইজ/ফন্ট দিলে কেবল ওই অংশ বদলাবে।';d.append(n);
+  }
+  d=sec('🎨 ফিল ও বর্ডার');
+  const bg=H(cs.backgroundColor);let bh=bg.hex,ba=bg.a;
+  const fill=()=>tg().forEach(t=>t.style.background=ba==0?'transparent':RGBA(bh,ba));
+  row(d,'ব্যাকগ্রাউন্ড',col(bh,v=>{bh=v;if(!ba)ba=1;fill()}),rng(Math.round(ba*100),0,100,1,v=>{ba=v/100;fill()}));
+  let bc=H(cs.borderTopColor).hex,bw=parseFloat(cs.borderTopWidth)||0,bs=cs.borderTopStyle=='none'?'solid':cs.borderTopStyle;
+  const brd=()=>tg().forEach(t=>t.style.border=bw?`${bw}px ${bs} ${bc}`:'0 solid transparent');
+  row(d,'বর্ডার রং',col(bc,v=>{bc=v;if(!bw)bw=2;brd()}),num(bw,0,40,1,v=>{bw=v;brd()}));
+  row(d,'বর্ডার ধরন',sl([['solid','সলিড'],['dashed','ড্যাশ'],['dotted','ডট'],['double','ডাবল']],bs,v=>{bs=v;brd()}),bt('বর্ডার ✕',()=>{bw=0;brd();render()}));
+  row(d,'কোণ গোল',rng(parseFloat(cs.borderTopLeftRadius)||0,0,200,1,v=>tg().forEach(t=>t.style.borderRadius=v+'px')));
+  d=sec('🌑 ছায়া — শুধু বক্সের');
+  shadowUI(d,'বক্স ছায়া',cs.boxShadow!='none',{x:0,y:8,b:24,a:.25},s=>tg().forEach(t=>t.style.boxShadow=s?`${s.x}px ${s.y}px ${s.b}px ${s.s}px ${RGBA(s.c,s.a)}`:'none'),1);
+  if(!isIm){
+    d=sec('🌑 ছায়া — শুধু লেখার');
+    shadowUI(d,'লেখার ছায়া',cs.textShadow!='none',{x:2,y:2,b:4,a:.45},s=>tg().forEach(t=>t.style.textShadow=s?`${s.x}px ${s.y}px ${s.b}px ${RGBA(s.c,s.a)}`:'none'));
+  }
+  if(isIm){
+    const img=el.querySelector('img');
+    if(!img){d=sec('🖼 ছবি');d.append('ছবি যোগ করতে বক্সে ডাবল-ক্লিক করুন');}
+    else{
+      const f=fxOf(img);d=sec('🖼 ছবি');
+      row(d,'ফিট',sl([['contain','পুরোটা দেখান'],['cover','ভরাট (ক্রপ)'],['fill','টেনে ভরাট']],img.style.objectFit||'contain',v=>img.style.objectFit=v),bt('↔ উল্টান',()=>{img.dataset.fl=img.dataset.fl?'':'1';img.style.transform=img.dataset.fl?'scaleX(-1)':''}));
+      row(d,'উজ্জ্বলতা',rng(f.br,20,200,1,v=>setFx(img,{br:v},el)));
+      row(d,'কনট্রাস্ট',rng(f.ct,20,200,1,v=>setFx(img,{ct:v},el)));
+      row(d,'সাদাকালো',rng(f.gs,0,100,1,v=>setFx(img,{gs:v},el)));
+      row(d,'ঝাপসা',rng(f.bl,0,20,1,v=>setFx(img,{bl:v},el)));
+      d=sec('🌑 ছায়া — শুধু ছবির আকৃতির');
+      shadowUI(d,'ছবির ছায়া',!!f.sh,{x:6,y:10,b:14,a:.4},s=>setFx(img,{sh:s},el));
+    }
+  }
+  if(isCard){
+    d=sec('📷 কার্ডের ছবি');
+    const phs=()=>tg().map(t=>t.querySelector('.ph')).filter(Boolean);
+    row(d,'ছবির কোণ',rng(parseFloat(getComputedStyle(el.querySelector('.ph')).borderTopLeftRadius)||0,0,150,1,v=>phs().forEach(p=>p.style.borderRadius=v+'px')));
+    row(d,'ফিট',sl([['cover','ভরাট'],['contain','পুরোটা']],'cover',v=>phs().forEach(p=>{p.querySelectorAll('img').forEach(i=>i.style.objectFit=v)})));
+  }
+  d=sec('⚙ অ্যাকশন');row(d,'',bt('⧉ কপি',()=>$('#dup').click()),bt('🗑 মুছুন',()=>$('#del').click()),bt('✕ বাদ দিন',()=>select(null)));
+  layers();
+}
+
+/* ---- স্তর তালিকা (পেজের বাইরের জিনিসও এখান থেকে ধরা যায়) ---- */
+function layers(){
+  const p=sel?sel.closest('.page'):cur;if(!p)return;
+  const d=sec('🗂 স্তর — '+p.id.toUpperCase());
+  [...p.children].filter(e=>e.classList.contains('tb')).forEach(e=>{
+    const out=e.offsetLeft+e.offsetWidth<0||e.offsetTop+e.offsetHeight<0||e.offsetLeft>p.clientWidth||e.offsetTop>p.clientHeight;
+    const b=document.createElement('button');b.className='ly'+(e==sel?' on':'')+(out?' out':'');
+    b.textContent=(out?'⚠ ':'')+((e.querySelector('.imb img')?'🖼 ':'')+(e.textContent.replace('⠿','').trim().slice(0,24)||'(খালি)'));
+    b.onclick=()=>{if(out)bring(e);select(e);e.scrollIntoView({block:'center',behavior:'smooth'})};
+    d.append(b);
+  });
+}
+
+/* ---- কিছু নির্বাচিত না থাকলে: ক্যানভাস/পেজ প্রপার্টি ---- */
+const PN={p1:'পেজ ১ — কভার',p2:'পেজ ২',p3:'পেজ ৩',p4:'পেজ ৪ — ফরম'};
+const SH={ellipse:'ellipse(78% 100% at 50% 0)',flat:'inset(0)',diag:'polygon(0 0,100% 0,100% 84%,0 100%)',v:'polygon(0 0,100% 0,100% 84%,50% 100%,0 84%)',wave:'polygon(0 0,100% 0,100% 72%,90% 78%,78% 80%,66% 76%,52% 70%,38% 72%,24% 80%,10% 82%,0 76%)',round:'ellipse(120% 100% at 50% 0)'};
+const SF={ellipse:'ellipse(78% 100% at 50% 100%)',flat:'inset(0)',diag:'polygon(0 26%,100% 0,100% 100%,0 100%)',v:'polygon(0 16%,50% 0,100% 16%,100% 100%,0 100%)',wave:'polygon(0 30%,10% 22%,24% 20%,38% 28%,52% 34%,66% 30%,78% 22%,90% 20%,100% 26%,100% 100%,0 100%)',round:'ellipse(120% 100% at 50% 100%)'};
+const SHN=[['ellipse','বাঁকা'],['flat','সোজা'],['diag','ঢালু'],['v','V আকৃতি'],['wave','ঢেউ'],['round','গোল']];
+function bandUI(p,key,title,h0,shapes,v){
+  const d=sec(title);
+  const st=JSON.parse(p.dataset[key]||'null')||{on:1,c1:cvar('--c1'),c2:cvar('--c1'),a:135,h:h0,s:'ellipse'};
+  const ap=()=>{
+    p.dataset[key]=JSON.stringify(st);p.classList.add('cu');
+    p.style.setProperty(v[0],st.c1==st.c2?st.c1:`linear-gradient(${st.a}deg,${st.c1},${st.c2})`);
+    p.style.setProperty(v[1],st.h+'px');
+    if(shapes)p.style.setProperty(v[2],st.on?shapes[st.s]:'inset(0 0 100% 0)');
+  };
+  if(shapes)row(d,'দেখান',chb(!!st.on,x=>{st.on=x?1:0;ap()}));
+  row(d,'রং ১ / ২',col(st.c1,x=>{st.c1=x;ap()}),col(st.c2,x=>{st.c2=x;ap()}));
+  row(d,'গ্র্যাডিয়েন্ট',rng(st.a,0,360,1,x=>{st.a=x;ap()}));
+  row(d,'উচ্চতা',rng(st.h,40,700,1,x=>{st.h=x;ap()}));
+  if(shapes)row(d,'আকৃতি',sl(SHN,st.s,x=>{st.s=x;ap()}));
+}
+function setSize(w,h){R.style.setProperty('--pw',w+'mm');R.style.setProperty('--phh',(h-.4)+'mm');toast(`ক্যানভাস ${w}×${h} মিমি`);setTimeout(render,50)}
+function pageProps(){
+  const p=cur||$('#p1');
+  let d=sec('📄 ক্যানভাস — '+(PN[p.id]||p.id));
+  const w=Math.round(parseFloat(R.style.getPropertyValue('--pw'))||210),h=Math.round((parseFloat(R.style.getPropertyValue('--phh'))||296.6)+.4);
+  const key=w+'x'+h,pre=[['210x297','A4 (২১০×২৯৭)'],['148x210','A5 (১৪৮×২১০)'],['297x420','A3 (২৯৭×৪২০)'],['216x279','Letter'],['210x210','স্কোয়ার'],['custom','কাস্টম']];
+  let cw=w,ch=h;
+  row(d,'সাইজ',sl(pre,pre.some(x=>x[0]==key)?key:'custom',v=>{if(v!='custom'){const[a,b]=v.split('x').map(Number);setSize(a,b)}}));
+  row(d,'মিমি',num(cw,40,1000,1,v=>cw=v),num(ch,40,1500,1,v=>ch=v),bt('প্রয়োগ',()=>setSize(cw,ch)),bt('⇄ ঘুরান',()=>setSize(ch,cw)));
+  const n=document.createElement('div');n.style.cssText='opacity:.65;font-size:11px;line-height:1.4';n.textContent='সাইজ সব পেজে একসাথে বদলায়। A3 বুকলেট প্রিন্টে ২টি পেজ পাশাপাশি বসে।';d.append(n);
+  let all=false;
+  const pgs=()=>all?$$('.page'):[p];
+  d=sec('🎨 ক্যানভাসের রং');
+  const cur_=H(getComputedStyle(p).backgroundColor);
+  row(d,'ব্যাকগ্রাউন্ড',col(cur_.hex,v=>pgs().forEach(x=>x.style.backgroundColor=v)),bt('স্বচ্ছ',()=>pgs().forEach(x=>x.style.backgroundColor='transparent')),bt('রিসেট',()=>pgs().forEach(x=>x.style.backgroundColor='')));
+  row(d,'প্যাটার্ন',chb(getComputedStyle(p).backgroundImage!='none',v=>pgs().forEach(x=>v?x.style.removeProperty('--pat'):x.style.setProperty('--pat','none'))));
+  row(d,'সব পেজে',chb(false,v=>all=v));
+  row(d,'সব লেখার রং',col('#222222',v=>p.querySelectorAll('.tb:not(.im),.card').forEach(t=>t.style.color=v)));
+  if(p.id=='p1'){
+    bandUI(p,'hb','🎀 হেডার ব্যান্ড',340,SH,['--hbg','--hh','--hcl']);
+    bandUI(p,'fb','🎀 ফুটার ব্যান্ড',150,SF,['--fbg','--fh','--fcl']);
+    d=sec('🖼 ফ্রেম (বর্ডার রেখা)');
+    const fr=JSON.parse(p.dataset.fr||'null')||{on:1,c:cvar('--c2'),w:2,s:'solid',i:16,r:8};
+    const ap=()=>{p.dataset.fr=JSON.stringify(fr);p.style.setProperty('--fi',fr.i+'px');p.style.setProperty('--fb',fr.on?`${fr.w}px ${fr.s} ${fr.c}`:'0 solid transparent');p.style.setProperty('--fr',fr.r+'px')};
+    row(d,'দেখান',chb(!!fr.on,v=>{fr.on=v?1:0;ap()}));
+    row(d,'রং / মোটা',col(fr.c,v=>{fr.c=v;ap()}),num(fr.w,1,40,1,v=>{fr.w=v;ap()}));
+    row(d,'ধরন',sl([['solid','সলিড'],['dashed','ড্যাশ'],['dotted','ডট'],['double','ডাবল']],fr.s,v=>{fr.s=v;ap()}));
+    row(d,'ব্যবধান',rng(fr.i,0,80,1,v=>{fr.i=v;ap()}));
+    row(d,'কোণ',rng(fr.r,0,80,1,v=>{fr.r=v;ap()}));
+  }
+  if(p.id=='p2'||p.id=='p3')bandUI(p,'hb','🎀 হেডার ব্যান্ড',108,null,['--hbg','--hh']);
+  layers();
+}
+function render(){
+  if(!document.body.classList.contains('ino'))return;
+  const y=ins.scrollTop;ins.innerHTML='';
+  if(sel)elProps(sel);else pageProps();
+  ins.scrollTop=y;
+}
+const _s3=select;
+select=function(el){_s3(el);lr=(lr&&el&&el.contains(lr.commonAncestorContainer))?lr:null;chip();render()};
+addEventListener('pointerup',e=>{if(e.target.closest&&e.target.closest('#book'))setTimeout(render,40)});
+render();
+
+/* ---- কিবোর্ডে সরানো: তীর চিহ্ন ১px, Shift+তীর ১০px ---- */
+addEventListener('keydown',e=>{
+  const a=document.activeElement,ed=a&&(a.isContentEditable||/INPUT|SELECT|TEXTAREA/.test(a.tagName));
+  if(ed||!sel||!sel.classList.contains('tb'))return;
+  const d=e.shiftKey?10:1,k={ArrowLeft:[-d,0],ArrowRight:[d,0],ArrowUp:[0,-d],ArrowDown:[0,d]}[e.key];
+  if(!k)return;e.preventDefault();
+  sel.style.left=sel.offsetLeft+k[0]+'px';sel.style.top=sel.offsetTop+k[1]+'px';
+});
+
+/* ---- প্রিন্ট: কাস্টম ক্যানভাস সাইজ অনুযায়ী ---- */
+pr=function(m){
+  select(null);
+  const w=Math.round(parseFloat(R.style.getPropertyValue('--pw'))||210),h=Math.round((parseFloat(R.style.getPropertyValue('--phh'))||296.6)+.4);
+  $('#ps').textContent=m=='b'?`@page{size:${w*2}mm ${h}mm;margin:0}`:`@page{size:${w}mm ${h}mm;margin:0}`;
+  document.body.classList.remove('a','b');document.body.classList.add(m);setTimeout(()=>print(),60);
+};
+$('#fitb').onclick=()=>{
+  const pw=$('#p1').offsetWidth||794,B=document.body.classList;
+  const w=innerWidth-(B.contains('sbo')&&innerWidth>760?330:30)-(B.contains('ino')&&innerWidth>900?290:0);
+  const z=Math.max(.3,Math.min(1.2,w/pw));book.style.zoom=z;$('#z2').value=Math.round(z*100);
+};
+})();
+</script>
+</body>
+</html>
